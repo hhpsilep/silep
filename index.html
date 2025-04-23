@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Consideraciones Educativas y de Discusión</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --overlay-bg: rgba(0, 0, 0, 0.85);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-bottom: 30px;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        h1 {
+            margin: 0;
+            font-weight: 300;
+            font-size: 2.5rem;
+        }
+        
+        .movie-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .movie-card {
+            width: 300px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--card-bg);
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .movie-poster {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .movie-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--overlay-bg);
+            color: white;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .movie-card:hover .movie-overlay {
+            opacity: 1;
+        }
+        
+        .movie-info {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        
+        .movie-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .movie-synopsis {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .watch-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .watch-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 40px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .disclaimer {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Para Consideraciones Educativas y de Discusión</h1>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="movie-grid" id="movieContainer">
+            <!-- Las películas se cargarán aquí dinámicamente -->
+        </div>
+    </main>
+    
+    <footer>
+        <div class="disclaimer">
+            <p>Aviso Legal: Esta plataforma funciona como un índice de contenido audiovisual disponible en la web. No realizamos hosting de ningún archivo - simplemente enlazamos a material que ya existe en servidores de terceros. Todo el contenido mostrado (posters, títulos e información) es propiedad de sus respectivos creadores y se utiliza bajo el principio de fair use para fines educativos y de discusión. Recomendamos apoyar siempre las obras oficiales.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Datos de las películas
+        const movies = [
+
+{
+ nombre:	"A Different Man ",
+URL1:	"https://pics.filmaffinity.com/a_different_man-322920270-large.jpg",
+URL2:	"https://ok.ru/video/9602906065621",
+sinopsis:	"El ambicioso actor neoyorquino Edward se somete a una intervención quirúrgica radical para transformar drásticamente su aspecto. Como resultado, muchas cosas cambian en su vida y, sin embargo, todo sigue perturbadoramente igual. Aunque haya cambiado exteriormente y pueda empezar una nueva vida, sigue siendo quien es y no quien quiere ser. Entonces se pierde el papel de su vida y su nuevo rostro de ensueño se convierte en una pesadilla."
+},{ nombre:	"No Other Land ",
+URL1:	"https://pics.filmaffinity.com/no_other_land-557635922-large.jpg",
+URL2:	"https://ok.ru/video/8836492954209",
+sinopsis:	"Basel Adra, joven activista palestino de Masafer Yatta, en Cisjordania, lucha desde su infancia contra la expulsión masiva de su comunidad por las autoridades israelíes. Documenta la erradicación a cámara lenta de los pueblos de su región natal, donde los soldados desplegados por el gobierno israelí derriban poco a poco las casas y expulsan a sus habitantes. En un momento dado, conoce a Yuval, un periodista israelí, que le apoya en sus esfuerzos. Surge así una improbable alianza. Pero la relación entre ambos se tensa por la enorme desigualdad que los separa: Basel vive bajo ocupación militar mientras que Yuval vive libremente y sin restricciones."
+},{ nombre:	"5 cámaras rotas",
+URL1:	"https://pics.filmaffinity.com/5_broken_cameras-738384314-large.jpg",
+URL2:	"https://ok.ru/video/8883720555139",
+sinopsis:	"Al nacer su cuarto hijo, Emad, un agricultor palestino compra su primera cámara de vídeo. Poco a poco y en paralelo al crecimiento de su hijo empieza a grabar los actos de resistencia pacífica de los habitantes de su pueblo, Bil'in, frente al avance de los colonos israelíes y la construcción de un muro de separación entre las urbanizaciones. Durante más de cinco años, Emad graba este conflicto en el que dos de sus mejores amigos lideran la resistencia. Arrestos diarios, represión brutal por parte del ejército israelí. Hasta cinco cámaras de Emad son destrozadas por el ejército israelí. Cada una de ellas grabará una parte de esta impresionante historia."
+},{ nombre:	"La familia en el diván",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/gFTCCTLuAYJ9uTaoMUIAWWUVv7O.jpg",
+URL2:	"https://ok.ru/video/7791898593853",
+sinopsis:	"Mientras David está en una tienda de muebles con su madre, ella retira la lona de un sofá cubierto y se deja caer. Con una montaña de obligaciones esperando a la vuelta de la esquina, él está ansioso por marcharse, pero ella se niega a levantarse. Gruffudd, el hermano de David, y Linda, su hermana, parecen menos preocupados por la situación, ocupándose despreocupadamente de asuntos que parecen exasperantemente sin importancia. David se vuelve agresivo a la vez que intenta ser amable, reconociendo que el extraño comportamiento de su madre puede ser un signo de psicosis."
+},{ nombre:	"Vidas perfectas",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/6W3LWbOZTbmv0SKe4OizWR0rEtW.jpg",
+URL2:	"https://ok.ru/video/7963616152277",
+sinopsis:	"Alice (Jessica Chastain) y Celine (Anne Hathaway), disfrutan de sus idílicas vidas junto a sus respectivos hijos y exitosos maridos. Son mejores amigas y vecinas. La perfecta armonía de sus vidas se rompe repentinamente después de un trágico accidente. Una combinación de culpa, sospecha y paranoia destruye el vínculo entre Alice y Celine dando lugar a una dura batalla psicológica cuando los instintos maternales de ambas revelen su lado oscuro para defender a los suyos."
+},{ nombre:	"Compra ahora: La conspiración consumista",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/gPt7tEwM9PTGWPgRX5Kus2QCa9c.jpg",
+URL2:	"https://ok.ru/video/8650829925077",
+sinopsis:	"Desvela las tácticas ocultas y las estrategias encubiertas que usan las empresas y las grandes marcas para atraparnos en un ciclo interminable de compras, sin importar las consecuencias de consumir y producir cada vez más."
+},{ nombre:	"Deep Web (2015)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/sk6KzLhpWizGBrEt04qyzUqmSkn.jpg",
+URL2:	"https://ok.ru/video/8624231156437",
+sinopsis:	"Un documental que explora el surgimiento de un nuevo Internet; descentralizado, cifrado, peligroso y más allá de la ley."
+},{ nombre:	"El Tiempo que Queda (Le Temps qu'il reste)",
+URL1:	"https://pics.filmaffinity.com/the_time_that_remains_le_temps_qu_il_reste-245819368-large.jpg",
+URL2:	"https://ok.ru/video/3740508424761",
+sinopsis:	"Film semi-biográfico, dividido en cuatro episodios históricos, que narra la historia de una familia (mi familia) desde 1948 hasta la actualidad. La película está inspirada en los diarios de mi padre, empezando por cuando él era un luchador de la resistencia en 1948, y las cartas de mi madre a familiares que eran forzados a abandonar el país desde entonces. Combinados con mis memorias de ellos y con ellos, la película intenta retratar la vida diaria de aquellos palestinos que permanecen en su país y que fueron etiquetados como -árabe-isralíes-, viviendo como minoría en su propia tierra."
+},{ nombre:	"Kurt Cobain: sobre un hijo",
+URL1:	"https://pics.filmaffinity.com/kurt_cobain_about_a_son-714061680-large.jpg",
+URL2:	"https://ok.ru/video/9805082069590",
+sinopsis:	"Luego de su supuesto suicidio, la figura de Kurt Cobain como nuevo mártir rockero dio paso a múltiples especulaciones y puntos de vista alrededor de la propia industria musical y, por supuesto, de su vida personal. Las conjeturas y los diferentes acercamientos comienzan de a poco a plasmarse en propuestas cinematográficas, algunas más felices que otras. Y si bien el abanico de ofertas puede ser diverso, ninguno podría igualar el motor que lleva adelante esta película: la voz del propio Cobain. Utilizando parte de más de veinticinco horas de entrevistas con material inédito, el líder de Nirvana se convierte en narrador excluyente de un documental intimista que va desglosando de manera pausada su propia historia: su infancia, sus primeros pasos en la música, su primer concierto, el encontronazo con la fama, sus últimos días. Un detalle: la música hipnótica de Steve Fisk (productor de Blew, primer Ep de Nirvana) y Ben Gibbard (Death Cab For Cutie)."
+},{ nombre:	"Sólo te tengo a ti (A la folie, pas du tout)",
+URL1:	"https://pics.filmaffinity.com/a_la_folie_pas_du_tout-444818346-large.jpg",
+URL2:	"https://ok.ru/video/7788703779445",
+sinopsis:	"Angélique es una joven enamorada perdidamente de un cardiólogo casado a punto de ser padre, pero su amor es tan intenso que está dispuesta a llegar a la locura... o a hacer cualquier locura con tal de conquistar al hombre de sus sueños."
+},{ nombre:	"V de Vendetta (2006)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/yJea98u5qGwRoKlWhUXZw5rUaqo.jpg",
+URL2:	"https://ok.ru/video/7366709742324",
+sinopsis:	"En un futuro no muy lejano, Gran Bretaña se ha convertido en un país totalitario dirigido con mano de hierro por un tirano (John Hurt). Una tarde, tras el toque de queda, Evey (Natalie Portman) es rescatada en plena calle por un misterioso enmascarado cuyo nombre es -V- (Hugo Weaving). El extraño personaje le explica cuáles son sus planes para recuperar la libertad. En efecto, todas las acciones de V tendrán como objetivo hacer estallar en todo el país una revolución contra el gobierno fascista."
+},{ nombre:	"Incendies (2010)",
+URL1:	"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/yH6DAQVgbyj72S66gN4WWVoTjuf.jpg",
+URL2:	"https://ok.ru/video/2252719655485",
+sinopsis:	"Jeanne y Simon Marwan son dos gemelos que viven en Canadá cuya madre Nawal, tras pasar sus últimos días sin hablar, acaba de fallecer. En el acto de apertura del testamento, el notario les da dos cartas que deben ser entregadas a un padre al que creían muerto y a un hermano cuya existencia desconocían. Jeanne decide entonces emprender un viaje al Líbano para intentar localizarlos y encontrar respuestas a su existencia, pero Simon no quiere saber nada del tema... Basada en una obra de teatro de Wajdi Mouawad."
+},{ nombre:	"1984 (1984)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/jVRtxHwDkiKDKCinh9xy7lrg9go.jpg",
+URL2:	"https://ok.ru/video/7524661004847",
+sinopsis:	"El futuro, año 1984. Winston Smith (John Hurt) soporta una abyecta existencia bajo la continua vigilancia de las autoridades de la Oceanía totalitaria. Pero su vida se convertirá en una pesadilla cuando pruebe el amor prohibido y cometa el crimen de pensar libremente. Enviado al siniestro “Ministerio del Amor”, se encuentra a merced de O’Brien (Richard Burton), un cruel oficial decidido a destruir su libertad de pensamiento y a quebrantar su voluntad."
+},{ nombre:	"Réquiem por el sueño Americano (2015)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/z30fIUchddu5RPUN8JWFiDhk2yp.jpg",
+URL2:	"https://ok.ru/video/1531042073289",
+sinopsis:	"Noam Chomsky, considerado uno de los intelectuales vivos más importantes, habla sobre la deliberada concentración de poder y riqueza que está en manos de unos pocos, la desaparición de la clase media y el canto del cisne de la democracia funcional."
+},{ nombre:	"Kinds of Kindness (2024)",
+URL1:	"https://image.tmdb.org/t/p/original/iZDzilM8PvttTs7NpNExxJBwlCl.jpg",
+URL2:	"https://ok.ru/video/7791989754581",
+sinopsis:	"Fábula en forma de tríptico que narra tres historias: la de un hombre atrapado que intenta tomar las riendas de su propia vida; la de un policía aterrado porque su mujer, que había desaparecido en el mar, ha vuelto y parece otra persona; y la de una mujer decidida a encontrar a alguien con un don especial, destinado a convertirse en un prodigioso líder espiritual."
+},{ nombre:	"La sustancia (2024)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/w1PiIqM89r4AM7CiMEP4VLCEFUn.jpg",
+URL2:	"https://ok.ru/video/8015213431509",
+sinopsis:	"'Tú, pero mejor en todos los sentidos'. Esta es la promesa, un producto revolucionario basado en la división celular, que crea un alter ego más joven, más bello, más perfecto. Tentada por la oportunidad Elisabeth Sparkle, una celebridad en decadencia, consume este suero del mercado negro creando una versión rejuvenecida de sí misma, Sue, con efectos tan inesperados como aterradores."
+},{ nombre:	"La casa de Jack (2018)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/oUQJZbLqTZTh287VSFUv1eoDDOl.jpg",
+URL2:	"https://ok.ru/video/3252873005692",
+sinopsis:	"Estados Unidos, década de 1970. Seguimos a Jack durante un período de 12 años, descubriendo los asesinatos que marcarán su evolución como asesino en serie. La historia se vive desde el punto de vista de Jack, quien considera que cada uno de sus asesinatos es una obra de arte en sí misma."
+},{ nombre:	"Rosalie (2024)",
+URL1:	"https://pics.filmaffinity.com/rosalie-557726649-large.jpg",
+URL2:	"https://ok.ru/video/7833236015829",
+sinopsis:	"Francia, 1870. Rosalie no es una joven como las demás. Ella esconde un gran secreto. Desde que nació, su cuerpo y cara están cubiertos de pelo y se ve obligada a disimularlo para evitar ser rechazada. Es lo que se llama una mujer barbuda. Pero nunca quiso convertirse en una atracción de feria. Un día, el dueño de un café con demasiadas deudas decide casarse con ella por su dote, sin conocer su secreto. Pero Rosalie está cansada de esconderse y quiere empezar a ser vista como una mujer a pesar de ser diferente."
+},{ nombre:	"Pi, fe en el caos (Pi)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/iauKJI5oeCAUeMfvmhCHuYd5vN4.jpg",
+URL2:	"https://vimeo.com/415812475",
+sinopsis:	"Max es un brillante matemático que está a punto de dar con el descubrimiento más importante de su vida: la decodificación del sistema numérico que rige el aparente caos del mercado bursátil. Mientras se acerca a la verdad, y afectado periódicamente por unas brutales jaquecas, Max es acosado por una agresiva firma de Wall Street y una secta judía que pretende descifrar los secretos ocultos tras los textos sagrados. Todos ansían apropiarse del inminente hallazgo de Max."
+},{ nombre:	"El cuervo (1994)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/ywQsxaKU3BTT0UMq134qsU9n4IT.jpg",
+URL2:	"https://ok.ru/video/4659999869641",
+sinopsis:	"Eric Draven y Shelly Webster están a punto de casarse, pero la noche antes del enlace son asesinados brutalmente. Un año después, el alma de Eric vuelve a la Tierra en forma de cuervo para vengarse."
+},{ nombre:	"Close (2022)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/pyVvz3B5IoJKd9ayozI8RrJW2vU.jpg",
+URL2:	"https://ok.ru/video/5163504306739",
+sinopsis:	"Léo y Rémi, de 13 años, son amigos de toda la vida. Hasta que un suceso impensable los separa. Léo se acerca entonces a Sophie, la madre de Rémi, para tratar de entender."
+},{ nombre:	"Sala de profesores (2023)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/5CJKu0gYgBbRs8MOxPLBpH55h62.jpg",
+URL2:	"https://ok.ru/video/6965670251069",
+sinopsis:	"Carla Nowak, una idealista profesora de matemáticas y deportes, comienza su primer trabajo en una escuela de secundaria. Cuando se producen una serie de robos en la escuela y se sospecha de uno de sus alumnos, decide llegar al fondo del asunto por su cuenta. Carla intenta mediar entre padres indignados, colegas obstinados y estudiantes agresivos, pero se enfrenta a las implacables estructuras del sistema escolar."
+},{ nombre:	"Los buenos profesores (Un métier sérieux)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/71OseiNj8J3OxD6q5vufonjgWaD.jpg",
+URL2:	"https://ok.ru/video/7833235819221",
+sinopsis:	"Empieza un nuevo curso escolar. Benjamin es un estudiante de doctorado sin beca. Ante la falta de perspectivas de futuro, acepta un trabajo como profesor en un instituto de París. Sin formación ni experiencia descubre lo duro que puede ser la profesión de maestro en un sistema educativo afectado por una falta de recursos crónica. Con el apoyo y el compromiso del resto de docentes, y un poco de suerte, se replanteará su vocación."
+},{ nombre:	"La clase (2008)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/7eT1tJtSZkIba8NM0lbFbFGt7Hp.jpg",
+URL2:	"https://ok.ru/video/7131047660096",
+sinopsis:	"François es un joven profesor de lengua francesa en un instituto conflictivo, situado en un barrio marginal. Sus alumnos tienen entre 14 y 15 años, y no duda en enfrentarse a ellos en estimulantes batallas verbales; pero el aprendizaje de la democracia puede implicar auténticos riesgos. Al comenzar el curso, los profesores, llenos de buenas intenciones, deseosos de dar la mejor educación a sus alumnos, se arman contra el desaliento. Pero la abismal diferencia de cultura y de actitud chocan violentamente en las aulas, que no son más que un microcosmos de la Francia contemporánea. Por muy divertidos que sean a veces los alumnos, sus comportamientos pueden cortar de raíz el entusiasmo de un profesor. La tremenda franqueza de François sorprende a sus alumnos, pero su estricto sentido de la ética se tambalea cuando los jóvenes empiezan a no aceptar sus métodos."
+},{ nombre:	"Hacia rutas salvajes (2007)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/aKquHNPpE6oJZBRYS63P1vcrO9g.jpg",
+URL2:	"https://ok.ru/video/696109107925",
+sinopsis:	"A principios de los años noventa, el joven e idealista Christopher McCandless (Emile Hirsch), adopta el nombre de Alexander Supertramp, deja sus posesiones y sus ahorros a la beneficencia y abandona el mundo civilizado con rumbo a la salvaje Alaska para entrar en contacto con la Naturaleza y descubrir el verdadero sentido de la vida. Adaptación del best-seller de Jon Krakauer, basado en las notas del diario de McCandless."
+},{ nombre:	"El consentimiento (2023)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/pXkjvDW9w7fKs29cMmWGV1Exnta.jpg",
+URL2:	"https://ok.ru/video/7833235884757",
+sinopsis:	"París, 1985. Vanessa tiene trece años cuando conoce a Gabriel Matzneff, un hombre muy inteligente y manipulador. El reconocido escritor de cincuenta años seduce a la joven. La adolescente se convierte en la amante y musa de un hombre celebrado por el mundo cultural y político. Perdiéndose en la relación, gradualmente comienza a darse cuenta de cuán destructiva y anormal es la situación, hasta que finalmente ve a Gabriel Matzneff como el depredador que realmente es. Vanessa ahora tiene un largo viaje para liberarse de su influencia y sanar de su sufrimiento."
+},{ nombre:	"Propaganda: la fábrica del consentimiento (2018)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/4bR4FJrgLo0WilU1PSKlIKCtofe.jpg",
+URL2:	"https://www.dailymotion.com/video/x7prtmi",
+sinopsis:	"¿Cómo se puede controlar a las masas? Al parecer, el publicista estadounidense Edward L. Bernays (1891-1995), pionero en el campo de la propaganda y las relaciones públicas, conocía la respuesta a esta pregunta clave. La sorprendente historia del maestro de la manipulación y la creación de la ingeniería del consentimiento; una aterradora historia real sobre publicidad, mentiras y charlatanes."
+},{ nombre:	"Calladita (2024)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/mJS5WusuyNNQvUerHC7RfIrtNd8.jpg",
+URL2:	"https://ok.ru/video/7833235622613",
+sinopsis:	"Ana, recién llegada de Colombia, es empleada doméstica en una lujosa mansión donde veranea una adinerada familia de marchantes de arte. La joven trabaja de sol a sol, sin contrato, bajo la promesa de conseguir condiciones dignas al final del verano, siempre y cuando sea discreta y calladita. Pero a través de Gisela, la empleada de la casa vecina, Ana descubrirá que las cosas no funcionan exactamente como le han contado, y aprenderá a divertirse un poco más durante su verano en la Costa Brava."
+},{ nombre:	"Big Fish (2003)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/m4gYCeV4GfGDw4PpMgU9kFIaNxP.jpg",
+URL2:	"https://ok.ru/video/3731717360341",
+sinopsis:	"William Bloom (Billy Crudup) no tiene muy buena relación con su padre (Albert Finney), pero tras enterarse de que padece una enfermedad terminal, regresa a su hogar para estar a su lado en sus últimos momentos. Una vez más, William se verá obligado a escucharlo mientras cuenta las interminables historias de su juventud. Pero, en esta ocasión, tratará de averiguar cosas que le permitan conocer mejor a su padre, aunque para ello tendrá que separar claramente realidad y fantasía, elementos que aparecen siempre mezclados en los relatos de su progenitor."
+},{ nombre:	"Nise: El corazón de la locura (2016)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/eDEu2l4xvmhVuLerpHzzz2i1lgm.jpg",
+URL2:	"https://ok.ru/video/7770133498581",
+sinopsis:	"Al volver a trabajar en un hospital psiquiátrico en un suburbio de Rio de Janeiro, después de salir de prisión, la doctora Nise da Silveira (Gloria Pires) propone una nueva forma de tratamiento a los pacientes que sufren de esquizofrenia, eliminando el electrochoque y la lobotomía. Sus colegas de trabajo no aprueban su sistema de tratamiento y la aíslan, restándole hacerse cargo del abandonado Sector de Terapia Ocupacional, donde inicia una nueva forma de lidiar con los pacientes, a través del amor y del arte."
+},{ nombre:	"Mamá, mamá, mamá (2021)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/693GzhR4UhKydo4UOIvBJj23Cn9.jpg",
+URL2:	"https://ok.ru/video/7082941024833",
+sinopsis:	"La casa está llena de gente, pero Cleo se siente sola. Su abuela, tía y primas siempre están cerca, y lo han estado desde que su hermana pequeña Erin se ahogó en la piscina, dejando destrozada a la madre de Cleo. El mundo de Cleo se ha fragmentado. Una y otra vez, los recuerdos atraviesan el presente, tan cambiado. Con cuidado, paciencia y ternura, esas niñas y mujeres van llenando el vacío que les dejó la tristeza."
+},{ nombre:	"María Montessori (La nouvelle femme)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/dWqWJ5lHlj85lqVBi5OxehN6zW7.jpg",
+URL2:	"https://ok.ru/video/7973493869267",
+sinopsis:	"París, año 1900. Lili d'Alency es una popular cortesana que esconde un secreto. Su hija Tina nació con una discapacidad y la mantiene alejada para proteger su carrera y su reputación. Pero el día que se ve obligada a tener que cuidar de ella, Lili decide marcharse a Roma para comenzar una nueva vida. Allí conoce a María Montessori, una doctora que está desarrollando un revolucionario método educativo para trabajar con los llamados 'niños deficientes' y que años después se convertirá en una de las pedagogías mejor valoradas en todo el mundo: el 'Método Montessori'."
+},{ nombre:	"Miss Violence (2013)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/pEGEVgqLwhDV8ZGG5DK7NHDIU3T.jpg",
+URL2:	"https://ok.ru/video/7599909702269",
+sinopsis:	"Una niña decide suicidarse saltando al vacío el día de su undécimo cumpleaños. Por si no fuese ya un caso suficientemente extraño y doloroso de por sí, la chica tenía una sonrisa en su boca antes de lanzarse al vacío, y su familia tarda bien poco en hacer lo indecible para olvidar su mera existencia. Esto último alarma a los Servicios Sociales, que deciden hacer una visita a una familia aparentemente perfecta..."
+},{ nombre:	"Polytechnique (2009)",
+URL1:	"https://media.themoviedb.org/t/p/w300_and_h450_bestv2/k0xmtct9cSseksuFKMSXxM8hfni.jpg",
+URL2:	"https://ok.ru/video/90037488200",
+sinopsis:	"Se basa en los testimonios de los supervivientes del drama ocurrido en la Escuela politécnica de Montreal, el 6 de diciembre de 1989. La película cuenta los hechos a través de los ojos de Valérie y Jean-François, dos estudiantes cuya vida dio un vuelco cuando un hombre entró en la escuela con la idea de asesinar al mayor número de mujeres posible."
+},{ nombre:	"La insoportable levedad del ser",
+URL1:	"https://pics.filmaffinity.com/the_unbearable_lightness_of_being-769679862-large.jpg",
+URL2:	"https://ok.ru/video/7890467031795",
+sinopsis:	"Praga, poco antes de la primavera del 1968. Tomas, un cirujano checo, es un hombre muy mujeriego que aspira a encontrar una felicidad que no se vea alterada por cuestiones como libertad, compromiso, consumismo..."
+},{ nombre:	"El luchador ",
+URL1:	"https://pics.filmaffinity.com/the_wrestler-682448133-large.jpg",
+URL2:	"https://ok.ru/video/7336414153339",
+sinopsis:	"Randy -The Ram- Robinson (Mickey Rourke) es un luchador profesional de wrestling que, tras haber sido una estrella en la década de los ochenta, trata de continuar su carrera en el circuito independiente, combatiendo en cuadriláteros de tercera categoría. Cuando se da cuenta de que los brutales golpes que ha recibido a lo largo de su carrera le empiezan a pasar factura, decide poner un poco de orden en su vida: intenta acercarse a Stephanie, la hija que abandonó (Evan Rachel Wood) y trata de superar la soledad con su amor por Cassidy, una streaper (Marisa Tomei)."
+},{ nombre:	"Taxidermia ",
+URL1:	"https://pics.filmaffinity.com/taxidermia-784704013-large.jpg",
+URL2:	"https://ok.ru/video/7017572403731",
+sinopsis:	"Historia de tres generaciones de una familia establecida por casualidad en Europa del Este. La del abuelo, un hombre algo torpe que se convierte en capitán durante la segunda Guerra Mundial; la del padre, un deportista de alto nivel; y finalmente la del hijo, un taxidermista. Las tres contadas por el miembro más joven de la familia. El surrealismo y los hechos históricos se mezclan en su imaginación, creando así una especie de -cuento de hadas realista-."
+},{ nombre:	"Sick of Myself ",
+URL1:	"https://pics.filmaffinity.com/syk_pike-284404282-large.jpg",
+URL2:	"https://ok.ru/video/5988595141181",
+sinopsis:	"Signe y Thomas mantienen una relación de pareja malsana y competitiva, que toma un giro pernicioso cuando Thomas obtiene cierta notoriedad como artista contemporáneo. La reacción de Signe consistirá en inventarse un nuevo personaje y tratar a la desesperada de llamar la atención y suscitar la compasión para recuperar su estatus."
+},{ nombre:	"Vivir dos veces ",
+URL1:	"https://pics.filmaffinity.com/vivir_dos_veces-799656644-large.jpg",
+URL2:	"https://ok.ru/video/2615537109550",
+sinopsis:	"Emilio (Oscar Martínez), su hija Julia (Inma Cuesta) y su nieta Blanca (Mafalda Carbonell) emprenden un viaje disparatado y a la vez revelador. Antes de que a Emilio le falle la memoria definitivamente, la familia le ayudará a buscar al amor de su juventud. En el camino encontrarán la oportunidad de una vida nueva y sin trampas. Decisiones discutibles y contratiempos los llevará a enfrentarse a los engaños sobre los que han montado sus vidas. ¿Será posible vivir dos veces?"
+},{ nombre:	"Martín (Hache) ",
+URL1:	"https://pics.filmaffinity.com/martin_hache-793749679-large.jpg",
+URL2:	"https://ok.ru/video/5034097642008",
+sinopsis:	"Martín Echenique (Federico Luppi) es un director de cine argentino que lleva más de veinte años viviendo en Madrid. Detesta su país y se niega a recrearse en la nostalgia. Su hijo, al que todos llaman Hache (Juan Diego Botto), tiene 19 años y vive en Buenos Aires con su madre. Ni estudia ni trabaja; callejea y toca su guitarra eléctrica. Después de cinco años sin verse, vuelven a encontrarse en Buenos Aires cuando Hache sufre una sobredosis. La exmujer de Martín propone que el chico viva con su padre. En Madrid les esperan dos personas: Alicia (Cecilia Roth), la amante de Martín, una mujer más joven que él y harta de estar con un hombre que es incapaz de asumir ningún compromiso; y Dante (Eusebio Poncela), un actor que es el mejor y casi único amigo de Martín, y cuyo mayor placer es vivir en la cuerda floja. Martín comparte su vida con gente apasionada, pero él no se permite el lujo de sentir. El que ama está expuesto al dolor, y eso le da pánico."
+},{ nombre:	"Kurt Cobain: Montage of Heck",
+URL1:	"https://pics.filmaffinity.com/cobain_montage_of_heck-885173337-large.jpg",
+URL2:	"https://ok.ru/video/4606944610851",
+sinopsis:	"El documental autorizado del malogrado músico Kurt Cobain, desde su primera época en Aberdeen Washington hasta su éxito con la banda grunge Nirvana."
+},{ nombre:	"Aftersun ",
+URL1:	"https://pics.filmaffinity.com/aftersun-852065058-large.jpg",
+URL2:	"https://ok.ru/video/4591865301546",
+sinopsis:	"Sophie (Francesca Corio / Celia Rowlson-Hall como la Sophie adulta) reflexiona sobre la alegría compartida y la melancolía privada de unas vacaciones que hizo con su padre (Paul Mescal) 20 años atrás. Los recuerdos reales e imaginarios llenan los espacios entre las imágenes mientras intenta reconciliar al padre que conoció con el hombre que no conoció."
+},{ nombre:	"Ben X ",
+URL1:	"https://pics.filmaffinity.com/ben_x-589832899-large.jpg",
+URL2:	"https://ok.ru/video/3503165868634",
+sinopsis:	"Ben carga con la cruz de ser el raro de su clase, el favorito para las bromas y crueldades de los matones del instituto. La inteligencia de Ben es superior a la del resto de sus compañeros, pero también es retraído, exacerbadamente tímido... hasta el punto que parece rayar el autismo. Su vida en el colegio es un infierno pero, cuando llega a casa, al refugio de su habitación, se sienta delante del ordenador y surge el Ben amo y señor del juego online favorito de millones de adolescentes, incluídos los que lo atormentan a diario. Mediante este juego Ben logra mantenerse vivo, dejar de ser una víctima para convertirse en héroe."
+},{ nombre:	"La demora ",
+URL1:	"https://pics.filmaffinity.com/la_demora-679231723-large.jpg",
+URL2:	"https://ok.ru/video/7786110454415",
+sinopsis:	"María, trabajadora empedernida, sin pareja y madre de tres hijos, debe resolver qué hacer con su padre mayor y enfermo, a quien no aceptan en un asilo pues cuenta con una familia que podría cuidarlo."
+},{ nombre:	"Claroscuro ",
+URL1:	"https://pics.filmaffinity.com/passing-148463114-large.jpg",
+URL2:	"https://ok.ru/video/7813220534997",
+sinopsis:	"Estados Unidos, década de 1920. Clare es una mujer mulata casada con un racista blanco que se hace pasar por blanca, incluso ante su marido, para beneficiarse del estatus social y económico que les era negado a los negros en aquella época."
+},{ nombre:	"Qué tan lejos ",
+URL1:	"https://pics.filmaffinity.com/que_tan_lejos-218919419-large.jpg",
+URL2:	"https://ok.ru/video/3527639829077",
+sinopsis:	"Tristeza (Cecilia Vallejo) y Esperanza (Tania Martínez) son dos veinteañeras que mientras viajan por parajes poco conocidos de las montañas y la costa de Ecuador realizarán al mismo tiempo un viaje de autodescubrimiento de sí mismas."
+},{ nombre:	"Suite Habana",
+URL1:	"https://pics.filmaffinity.com/suite_habana-227058330-large.jpg",
+URL2:	"https://ok.ru/video/4444446132894",
+sinopsis:	"Amanece en La Habana. La ciudad despierta y comienza el día. La Habana, hoy, es un punto de referencia para muchos, un misterio para otros y un sueño lleno de contradicciones y contrastes para quienes la aman o la critican. Pero La Habana no es sólo un espacio, una sonoridad, una luz; La Habana es su gente. Y Suite Habana es un día cualquiera en la vida de unos cuantos habaneros corrientes. No hay entrevistas, ni diálogos ni narración; sólo imágenes, sonidos y música para expresar cinematográficamente el día a día de una realidad peculiar y única. Cada uno de los personajes representa la curiosa diversidad de los grupos sociales que se mueven en la ciudad... porque no hay una sola Habana: hay muchas Habanas invisibles y distintas para vivir."
+},{ nombre:	"Después de la boda ",
+URL1:	"https://pics.filmaffinity.com/efter_brylluppet_after_the_wedding-480978503-large.jpg",
+URL2:	"https://ok.ru/video/7024287877767",
+sinopsis:	"Jacob ha dedicado su vida a ayudar a los niños pobres que viven en las calles de la India. Cuando el orfanato que él dirige está a punto de cerrar, un hombre de negocios danés le hace una oferta muy generosa: cuatro millones de dólares para evitar el cierre del centro de acogida infantil que regenta. Pero Jacob debe volver a Dinamarca para tratar el asunto. Una vez allí, su benefactor lo invita a la boda de su hija."
+},{ nombre:	"Sybil",
+URL1:	"https://pics.filmaffinity.com/sybil_tv-924131144-large.jpg",
+URL2:	"https://ok.ru/video/2492899265167",
+sinopsis:	"Basada en la verdadera historia de una chica llamada Sybil, que tuvo una infancia tan terrible que a los trece años ya había desarrollado trece personalidades diferentes."
+},{ nombre:	"El acusado ",
+URL1:	"https://pics.filmaffinity.com/les_choses_humaines-773705759-large.jpg",
+URL2:	"https://ok.ru/video/6295041739423",
+sinopsis:	"Los Farel son una pareja poderosa: Jean es un destacado periodista francés, y su esposa Claire una ensayista conocida por su feminismo radical. Juntos tienen un hijo ejemplar, Alexandre, que estudia en una prestigiosa universidad estadounidense. Durante una breve visita a París, Alexandre conoce a Mila, la hija de la nueva pareja de su madre, y la invita a una fiesta. Al día siguiente, Mila presenta una denuncia contra Alexandre por violación, que destruye la armonía familiar y pone en marcha una inextricable máquina judicial mediática que confronta versiones opuestas."
+},{ nombre:	"Dogman ",
+URL1:	"https://pics.filmaffinity.com/dogman-432485980-large.jpg",
+URL2:	"https://ok.ru/video/7801099258509",
+sinopsis:	"De niño, Douglas fue maltratado por un padre violento, que luego lo arrojó a los perros. En lugar de atacarle, los perros le protegieron. Traumatizado y llevando una vida al margen de la sociedad con sus perros, Douglas desciende a una locura."
+},{ nombre:	"No Country for Old Men",
+URL1:	"https://pics.filmaffinity.com/no_country_for_old_men-150566696-large.jpg",
+URL2:	"https://ok.ru/video/7826333174485",
+sinopsis:	"En 1980, en la frontera de Texas, cerca de río Grande, Llewelyn Moss (Josh Brolin), un cazador de antílopes, descubre a unos hombres acribillados a balazos, un cargamento de heroína y dos millones de dólares en efectivo."
+},{ nombre:	"El cementerio de los elefantes ",
+URL1:	"https://pics.filmaffinity.com/el_cementerio_de_los_elefantes-951708168-large.jpg",
+URL2:	"https://www.youtube.com/watch?v=2k0NKXXXMMo",
+sinopsis:	"Desde la tierna edad de 14 años, Juvenal (Cristian Castillo) comenzó a beber alcohol y ahora, a los 33 años de edad y alcohólico, dedice pasar el resto de sus días en el infame El Cementerio de los Elefantes, en La Paz, Bolivia. Conocido como un lugar donde los alcohólicos van a morir, dentro del cementerio se encuentra la ''suite presidencial'', donde Juvenal recordará su infancia y oscura adolescencia mientras bebe hasta morir."
+},{ nombre:	"No matarás ",
+URL1:	"https://pics.filmaffinity.com/krotki_film_o_zabijaniu_a_short_film_about_killing-851677057-large.jpg",
+URL2:	"https://ok.ru/video/3475282528893",
+sinopsis:	"Varsovia. Un taxista está lavando su coche. Jacek, un joven campesino de mirada turbia, vaga por la ciudad. Piotr, un estudiante de derecho, se prepara para hacer su último examen. Sus destinos se cruzan cuando Jacek coge un taxi para ir a los suburbios de la ciudad, donde asesina brutalmente al taxista."
+},{ nombre:	"El quinto poder ",
+URL1:	"https://pics.filmaffinity.com/the_fifth_estate-758903451-large.jpg",
+URL2:	"https://ok.ru/video/7157135903354",
+sinopsis:	"En el año 2006, Julian Assange y Daniel Domscheit-Berg crean WikiLeaks, una plataforma que se dedica a filtrar, de modo anónimo, información secreta sobre los turbios manejos de la política gubernamental y sobre los crímenes de las grandes empresas. Pero cuando Assange y Berg tienen acceso a numerosos documentos confidenciales que afectan a los servicios de inteligencia de los Estados Unidos, se enfrentarán a una de las cuestiones claves de nuestro tiempo: ¿cuál es el coste de guardar secretos en una sociedad libre y cuál es el coste de revelarlos?"
+},{ nombre:	"Madre ",
+URL1:	"https://pics.filmaffinity.com/madre-605621324-large.jpg",
+URL2:	"https://ok.ru/video/314644630180",
+sinopsis:	"Diana está embarazada y el cuidado de Martín, su hijo autista, le abruma. No tiene a quien recurrir en las tareas de la casa mientras su marido Tomás pasa meses trabajando en Japón. Diana está a punto de explotar, cuando aparece Luz, una mujer de Filipinas que le ayudará en el cuidado del hogar y su hijo. Rápidamente, el niño comienza a mejorar bajo la supervisión de esta misteriosa cuidadora, con quien sólo se comunica en filipino."
+},{ nombre:	"The Mother",
+URL1:	"https://pics.filmaffinity.com/the_mother-819830402-large.jpg",
+URL2:	"https://ok.ru/video/7472446376583",
+sinopsis:	"Tras la muerte de su marido, May (Anne Reid), una mujer madura que vive en las afueras de la ciudad, va a Londres a ver a su familia. Durante su estancia, se ve arrastrada por la ajetreada vida de sus hijos. En la gran ciudad, lejos de su hogar, May tiene la impresión de haberse convertido en una de esas mujeres invisibles para los demás y cuya vida ya está acabada. Pero, de repente, se enamora de Darren, un hombre al que le dobla la edad (Daniel Craig) y que se acuesta con su hija."
+},{ nombre:	"Snowden ",
+URL1:	"https://pics.filmaffinity.com/snowden-767575981-large.jpg",
+URL2:	"https://ok.ru/video/7448513940181",
+sinopsis:	"Narra los acontecimientos que siguieron a la publicación por parte del diario 'The Guardian' de los documentos clasificados que aportó el joven analista de la Agencia de Seguridad Nacional (NSA) Edward Snowden sobre el programa secreto de vigilancia mundial de la Agencia en el 2013, unos documentos que revelaban que espiaban a miles de millones de personas de todo el planeta... Film Basado en el libro -The Snowden files. The inside story of the world's most wanted man-, escrito por Luke Harding, y en un libro escrito por Anatoly Kucherena, el abogado ruso de Edward Snowden."
+},{ nombre:	"Crazy, Not Insane",
+URL1:	"https://pics.filmaffinity.com/crazy_not_insane-620043511-large.jpg",
+URL2:	"https://ok.ru/video/2683430439541",
+sinopsis:	"Una mirada a la investigación realizada por la psiquiatra forense Dorothy Otnow Lewis, quien investigó la psicología de los asesinos."
+},{ nombre:	"Coherence ",
+URL1:	"https://pics.filmaffinity.com/coherence-280180556-large.jpg",
+URL2:	"https://ok.ru/video/1158351293023",
+sinopsis:	"En Finlandia, en 1923, el paso de un cometa hizo que los habitantes de un pueblo quedaran completamente desorientados; incluso una mujer llegó a llamar a la policía denunciando que el hombre que estaba en su casa no era su marido. Décadas más tarde, un grupo de amigos recuerda este caso mientras cenan, brindan y se preparan para ver pasar un cometa..."
+},{ nombre:	"Fallen Leaves",
+URL1:	"https://pics.filmaffinity.com/kuolleet_lehdet-954899133-large.jpg",
+URL2:	"https://ok.ru/video/8090420054611",
+sinopsis:	"Ansa es soltera y vive en Helsinki. Trabaja con un contrato de cero horas en un supermercado, abasteciendo los estantes; luego clasifica el plástico reciclable. Una noche se encuentra accidentalmente con el igualmente solitario trabajador Holappa, un alcohólico. Contra todo pronóstico y malentendidos, intentan construir una relación. Como resultado, Holappa logra controlar su adicción al alcohol."
+},{ nombre:	"12 años de esclavitud",
+URL1:	"https://pics.filmaffinity.com/12_years_a_slave_twelve_years_a_slave-305655779-large.jpg",
+URL2:	"https://ok.ru/video/1880469605077",
+sinopsis:	"Basada en un hecho real ocurrido en 1850, narra la historia de Solomon Northup, un culto músico negro que vivía con su familia en Nueva York. Tras tomar una copa con dos hombres, Solomon descubre que ha sido drogado y secuestrado para ser vendido como esclavo en una plantación de Louisiana. Solomon contempla cómo todos a su alrededor sucumben a la violencia y a la desesperación. Pero él decide no rendirse y esperar a que llegue el momento oportuno para recuperar la libertad y volver con su familia."
+},{ nombre:	"Desconocidos ",
+URL1:	"https://pics.filmaffinity.com/all_of_us_strangers-586936978-large.jpg",
+URL2:	"https://ok.ru/video/6677472283323",
+sinopsis:	"Una noche, en su torre casi vacía del Londres actual, Adam tiene un encuentro casual con un misterioso vecino, Harry, que pone patas arriba el ritmo de su vida cotidiana. A medida que va surgiendo una relación entre ellos, a Adam le preocupan los recuerdos del pasado y regresa a su ciudad natal y al hogar de su infancia."
+},{ nombre:	"La corporación ",
+URL1:	"https://pics.filmaffinity.com/la_corporacion-192804783-large.jpg",
+URL2:	"https://ok.ru/video/4301596002951",
+sinopsis:	"Felipe es un empresario estricto, meticuloso y cínico, que vive con su esposa Luz una relación idílica. Nada parece escaparse de una existencia encapsulada, acomodada y solvente, sin ningún sobresalto. Pero toda la disciplina con que está diseñada su vida cotidiana se empieza a descascarar a partir de una crisis en la que Felipe no puede controlar su intimidad, regulada por una oscura corporación, con quienes firmó los contratos que sostienen los hilos de su propia vida familiar."
+},{ nombre:	"Mary and Max",
+URL1:	"https://pics.filmaffinity.com/mary_and_max-528932806-large.jpg",
+URL2:	"https://ok.ru/video/6436414229152",
+sinopsis:	"Primer largometraje de Adam Elliot, ganador de un Oscar con el cortometraje -Harvey Krumpet-. Narra la larga amistad por correspondencia entre un cuarentón judío y obeso de Nueva York, y una niña australiana de ocho años que vive en los suburbios de Melbourne."
+},{ nombre:	"La ballena",
+URL1:	"https://pics.filmaffinity.com/the_whale-293958603-large.jpg",
+URL2:	"https://ok.ru/video/4592686008937",
+sinopsis:	"Un solitario profesor de inglés con obesidad severa (Brendan Fraser) intenta reconectar con su hija adolescente en una última oportunidad de redención."
+},{ nombre:	"Cisne negro ",
+URL1:	"https://pics.filmaffinity.com/black_swan-861293346-large.jpg",
+URL2:	"https://ok.ru/video/4249833507567",
+sinopsis:	"Nina (Natalie Portman), una brillante bailarina que forma parte de una compañía de ballet de Nueva York, vive completamente absorbida por la danza. La presión de su controladora madre (Barbara Hershey), la rivalidad con su compañera Lily (Mila Kunis) y las exigencias del severo director (Vincent Cassel) se irán incrementando a medida que se acerca el día del estreno. Esta tensión provoca en Nina un agotamiento nervioso y una confusión mental que la incapacitan para distinguir entre realidad y ficción."
+},{ nombre:	"Amor ",
+URL1:	"https://pics.filmaffinity.com/amour_love-290936946-large.jpg",
+URL2:	"https://ok.ru/video/3400260323897",
+sinopsis:	"Georges y Anne, dos ancianos de ochenta años, son profesores de música clásica jubilados que viven en París. Su hija, que también se dedica a la música, vive en Londres con su marido. Cuando, un día, Anne sufre un infarto que le paraliza un costado, el amor que ha unido a la pareja durante tantos años se verá puesto a prueba."
+},{ nombre:	"Eternal Sunshine of the Spotless Mind",
+URL1:	"https://pics.filmaffinity.com/eternal_sunshine_of_the_spotless_mind-314689716-large.jpg",
+URL2:	"https://ok.ru/video/30863854293",
+sinopsis:	"Joel (Jim Carrey) recibe un terrible golpe cuando descubre que su novia Clementine (Kate Winslet) ha hecho que borren de su memoria todos los recuerdos de su tormentosa relación. Desesperado, se pone en contacto con el creador del proceso, el Dr. Howard Mierzwiak, para que borre a Clementine de su memoria. Pero cuando los recuerdos de Joel empiezan a desaparecer de pronto redescubre su amor por Clementine. Desde lo más profundo de su cerebro intentará parar el proceso."
+},{ nombre:	"Competencia oficial ",
+URL1:	"https://pics.filmaffinity.com/competencia_oficial-435986547-large.jpg",
+URL2:	"https://ok.ru/video/4207913929429",
+sinopsis:	"En busca de trascendencia y prestigio social, un empresario multimillonario decide hacer una película que deje huella. Para ello, contrata a los mejores: un equipo estelar formado por la celebérrima cineasta Lola Cuevas (Penélope Cruz) y dos reconocidos actores, dueños de un talento enorme, pero con un ego aún más grande: el actor de Hollywood Félix Rivero (Antonio Banderas) y el actor radical de teatro Iván Torres (Oscar Martínez). Ambos son leyendas, pero no exactamente los mejores amigos. A través de una serie de pruebas cada vez más excéntricas establecidas por Lola, Félix e Iván deben enfrentarse no solo entre sí, sino también con sus propios legados."
+},{ nombre:	"12 monos ",
+URL1:	"https://pics.filmaffinity.com/twelve_monkeys_12_monkeys-969079026-large.jpg",
+URL2:	"https://ok.ru/video/1754123471375",
+sinopsis:	"Año 2035. Tras la epidemia provocada por un virus asesino que ha matado a millones de personas, los supervivientes se refugian en comunidades subterráneas, húmedas y frías. El prisionero James Cole se ofrece como voluntario para viajar al pasado y conseguir una muestra del virus, gracias a la cual los científicos podrán elaborar un antídoto. Durante el viaje conoce a una bella psiquiatra y a Jeffrey Goines, un excepcional enfermo mental. Cole tratará de encontrar al ”Ejército de los 12 Monos”, un grupo radical vinculado a la mortal enfermedad."
+},{ nombre:	"Bienvenido, Mr. Chance",
+URL1:	"https://pics.filmaffinity.com/being_there-932096996-large.jpg",
+URL2:	"https://ok.ru/video/4311376268019",
+sinopsis:	"Chance es un hombre peculiar. Su vida se reduce a cuidar el jardín de la mansión de un hombre adinerado y a ver la televisión el resto del día. Pero, cuando el dueño de la casa muere y Chance es despedido, no está preparado para hacer frente al mundo exterior. Tiene, sin embargo, la suerte de conocer a Eve, una buena mujer que lo acoge en su casa. Lo paradójico es que, poco a poco, este hombre analfabeto pero extremadamente cortés conseguirá engañar a muchos haciéndoles creer que es un gran político."
+},{ nombre:	"El truco final (El prestigio) ",
+URL1:	"https://pics.filmaffinity.com/the_prestige-464630296-large.jpg",
+URL2:	"https://ok.ru/video/6921628486228",
+sinopsis:	"En Londres, a finales del siglo XIX, cuando los magos eran los ídolos más aclamados, dos jóvenes ilusionistas se proponen alcanzar la fama. El sofisticado Robert Angier (Hugh Jackman) es un consumado artista, mientras que el tosco y purista Alfred Borden (Christian Bale) es un genio creativo, pero carece de la habilidad necesaria para ejecutar en público sus mágicas ideas. Al principio son compañeros y amigos que se admiran mutuamente. Sin embargo, cuando el mejor truco ideado por ambos fracasa, se convierten en enemigos irreconciliables: cada uno de ellos intentará por todos los medios superar al otro y acabar con él. Truco a truco, espectáculo a espectáculo, se va fraguando una feroz competición que no tiene límites."
+},{ nombre:	"El elemento del crimen ",
+URL1:	"https://pics.filmaffinity.com/forbrydelsens_element_the_element_of_crime-817724680-large.jpg",
+URL2:	"https://ok.ru/video/2812732639850",
+sinopsis:	"Fisher, un inspector de policía, regresa a El Cairo después de haber estado investigando un asesinato en Europa. Se encuentra en un estado de confusión que lo lleva a buscar la ayuda de un psicoterapeuta. Su objetivo es intentar reconstruir, por medio de la hipnosis, el crimen a partir de los datos que ha ido recopilando."
+},{ nombre:	"En la puta vida ",
+URL1:	"https://pics.filmaffinity.com/en_la_puta_vida-451993634-large.jpg",
+URL2:	"https://ok.ru/video/38634785346",
+sinopsis:	"Elisa, una joven uruguaya de 27 años, sueña con abrir una peluquería en Montevideo. Sin recursos y con dos niños a los que cuidar, y con un carácter rebelde, Elisa rompe con su familia y con su amante y se queda sin trabajo, todo al mismo tiempo. Sin otra salida, comienza a trabajar como acompañante, pero pronto se convierte en prostituta y se ve envuelta en un tráfico internacional de mujeres y una guerra de clanes."
+},{ nombre:	"No puedes fiarte de nadie: A la caza del rey de la criptomoneda",
+URL1:	"https://pics.filmaffinity.com/trust_no_one_the_hunt_for_the_crypto_king-661101631-large.jpg",
+URL2:	"https://ok.ru/video/7753419655893",
+sinopsis:	"Cuando el joven fundador de un intercambio de criptomoneda malogrado fallece repentinamente, los furiosos inversores sospechan que su muerte no es lo que parece a simple vista."
+},{ nombre:	"Más allá de los sueños",
+URL1:	"https://pics.filmaffinity.com/what_dreams_may_come-870027388-large.jpg",
+URL2:	"https://ok.ru/video/3232186894909",
+sinopsis:	"Tras la muerte de sus dos hijos, el doctor Chris Nielson (Robin Williams) y su esposa Annie (Annabella Sciorra) continúan su vida a duras penas. Entonces Chris también muere en un accidente de coche y, cuando llega al cielo, conoce a Albert, que le muestra lo maravillosa que es la vida en el 'Más Allá'. Mientras tanto, la soledad sume a Annie en una locura que la aleja cada vez más de la vida."
+},{ nombre:	"La última sesión de Freud ",
+URL1:	"https://pics.filmaffinity.com/freud_s_last_session-765506688-large.jpg",
+URL2:	"https://ok.ru/video/7335972375200",
+sinopsis:	"Ambientada en vísperas de la Segunda Guerra Mundial y hacia el final de su vida, Freud invita al icónico autor C.S. Lewis a un debate sobre la existencia de Dios. Explorando la relación única de Freud con su hija lesbiana Anna y el romance poco convencional de Lewis con la madre de su mejor amigo, la película entreteje pasado, presente y fantasía."
+},{ nombre:	"La escafandra y la mariposa ",
+URL1:	"https://pics.filmaffinity.com/le_scaphandre_et_le_papillon_diving_bell_and_the_butterfly-894097369-large.jpg",
+URL2:	"https://ok.ru/video/2884864641597",
+sinopsis:	"Se inspira en la novela -La escafandra y la mariposa- escrita por Jean Dominique Bauby a causa de un accidente (1995) que lo introdujo en el mundo del -Locked in Syndrom- (encerrado en sí mismo). Totalmente paralizado, sin poder comer, hablar, ni respirar sin asistencia, el antiguo redactor jefe de la revista -Elle- dicta letra por letra, moviendo sólo el párpado izquierdo, una especie de viaje inmóvil."
+},{ nombre:	"Ojos bien cerrados",
+URL1:	"https://pics.filmaffinity.com/eyes_wide_shut-685089011-large.jpg",
+URL2:	"https://ok.ru/video/2320010250897",
+sinopsis:	"William Harford es un respetable médico neoyorquino cuya vida parece ir muy bien: está casado con una preciosa mujer, tiene una hija y un trabajo que le gusta. Pero, al día siguiente de asistir a una fiesta, su esposa Alice le habla de unas fantasías eróticas y de cómo estuvo a punto de romper su matrimonio por un desconocido. Abrumado por esta confesión, acaba entrando en un local, donde un antiguo compañero le habla de una congregación secreta dedicada al hedonismo y al placer sin límites. A partir de entonces un mundo dominado por el sexo y el erotismo se abre ante él."
+},{ nombre:	"Chica por un día ",
+URL1:	"https://pics.filmaffinity.com/un_jour_fille-401287427-large.jpg",
+URL2:	"https://ok.ru/video/7730588551893",
+sinopsis:	"Francia, siglo XVIII. Desde muy joven se obliga a Anne a vestirse como un hombre y cambiar su nombre debido a su atracción por las mujeres. Convertido en hombre, se casa y vive una gran historia de amor con su nueva esposa hasta que su pasado le alcanza. La verdadera historia de Anne Grandjean."
+},{ nombre:	"Chacal ",
+URL1:	"https://pics.filmaffinity.com/the_day_of_the_jackal-575835630-large.jpg",
+URL2:	"https://ok.ru/video/4234027338483",
+sinopsis:	"Año 1963. Chacal, un prestigioso asesino a sueldo cuya verdadera identidad nadie conoce, ha sido contratado por la OAS para llevar a cabo una arriesgada misión: asesinar al Presidente de la República Francesa, el general Charles De Gaulle. La novia de un paracaidista ejecutado por su pertenencia a la OAS es la encargada de proporcionar información sobre los movimientos del Presidente gracias a su relación con un miembro del servicio de seguridad de De Gaulle."
+},{ nombre:	"El maquinista",
+URL1:	"https://pics.filmaffinity.com/the_machinist-809965399-large.jpg",
+URL2:	"https://ok.ru/video/379912981183",
+sinopsis:	"Trevor Reznik, un empleado de una fábrica, padece desde hace un año un grave problema de insomnio, un mal que él oculta y que le provoca terribles alucinaciones. Debido a la fatiga se ha deteriorado tanto su salud física como su salud mental. Repelidos por su aspecto físico, sus compañeros de trabajo primero le evitan, y después se volverán contra él cuando uno de ellos pierde un brazo en un accidente en el que Trevor se ve involucrado."
+},{ nombre:	"Perdita Durango ",
+URL1:	"https://pics.filmaffinity.com/perdita_durango-798738553-large.jpg",
+URL2:	"https://ok.ru/video/1908655393397",
+sinopsis:	"Perdita Durango es una mujer joven y peligrosa. Cada noche sueña con un jaguar que lame su cuerpo desnudo y se acuesta a su lado. Morena, sexy y muy descarada, lo suyo es aprovecharse del prójimo y vivir a tope, arrastrando con cierto orgullo un pasado bañado en sangre y extrañas pasiones."
+},{ nombre:	"Mississippi  en llamas",
+URL1:	"https://pics.filmaffinity.com/mississippi_burning-915266764-large.jpg",
+URL2:	"https://ok.ru/video/3442619910781",
+sinopsis:	"En 1964, en un pueblo sureño, donde el racismo está profundamente arraigado y el Ku Klux Klan reivindica violentamente la supremacía blanca, tres activistas defensores de los derechos humanos desaparecen sin dejar rastro. Dos agentes del FBI, de caracteres muy diferentes, se harán cargo de la investigación."
+},{ nombre:	"Cómo ser John Malkovich ",
+URL1:	"https://pics.filmaffinity.com/being_john_malkovich-576254491-large.jpg",
+URL2:	"https://ok.ru/video/3687169067645",
+sinopsis:	"La vida de Craig Schwartz está llegando al final de un ciclo. Craig es un marionetista callejero con un gran talento, pero él tiene la impresión de que su vida carece de sentido. Nueva York ha cambiado mucho y la gente no le presta mucha atención. Lleva diez años casado con Lotte, que trabaja en una tienda de animales y está obsesionada con su trabajo. Él consigue encontrar trabajo en la planta 7'5 del edificio Mertin-Flemmer de Manhattan, donde encuentra una pequeña puerta que le permite el acceso a un pasillo secreto que le aspira y que le permite acceder al cerebro de John Malkovich."
+},{ nombre:	"Lugares comunes",
+URL1:	"https://pics.filmaffinity.com/lugares_comunes-166936253-large.jpg",
+URL2:	"https://ok.ru/video/7229215672970",
+sinopsis:	"Fernando Robles (Federico Luppi) es porteño, ya ha cumplido los sesenta y es profesor de literatura en la universidad. Enseña a enseñar. Lleva toda la vida casado con Liliana Rovira (Mercedes Sampietro), española, hija de catalanes, que trabaja como asistente social en barrios marginales de Buenos Aires. Se quieren, se respetan, son leales. Nunca se aburren estando juntos, les gusta estar solos. Se conocen profundamente, se aceptan, se pelean sin odio, se divierten. Son amantes, socios, amigos, cómplices. Ninguno de ellos concibe la vida sin el otro. Tienen un hijo, Pedro (Carlos Santamaría), casado y con dos hijos, que tiene un buen trabajo en Madrid, donde vive en una urbanización de clase media acomodada. Ambos sobrellevan con esfuerzo y resignación las ausencias, las privaciones, la incertidumbre del futuro, la falta de proyectos, la desesperanza. Pero el mundo plácido y reflexivo de Fernando se ve profundamente alterado cuando recibe sin previo aviso la comunicación oficial en la que le informan de su jubilación forzosa, un hecho que va a cambiarle la vida..."
+},{ nombre:	"The Master ",
+URL1:	"https://pics.filmaffinity.com/the_master-521616486-large.jpg",
+URL2:	"https://ok.ru/video/3216509831805",
+sinopsis:	"Drama sobre la Iglesia de la Cienciología. Lancaster Dodd (Philip Seymour Hoffman), un intelectual brillante y de fuertes convicciones, crea una organización religiosa que empieza a hacerse popular en Estados Unidos hacia 1952. Freddie Quell (Joaquin Phoenix), un joven vagabundo, se convierte en su mano derecha. Sin embargo, cuando la secta triunfa y consigue atraer a numerosos y fervientes seguidores, a Freddie le surgirán dudas."
+},{ nombre:	"Los que se quedan",
+URL1:	"https://pics.filmaffinity.com/the_holdovers-349054843-large.jpg",
+URL2:	"https://ok.ru/video/7111081789999",
+sinopsis:	"Paul Hunham, un profesor cascarrabias de un prestigioso colegio de Nueva Inglaterra, se ve obligado a permanecer en el campus durante las vacaciones de Navidad de 1970 para velar por un puñado de estudiantes que no tienen a dónde ir. Contra todo pronóstico, la convivencia le llevará a forjar un insólito vínculo con uno de ellos, Angus, un inteligente y problemático muchacho con sus propios traumas, y con Mary, la jefa de cocina de la escuela, que acaba de perder a un hijo en Vietnam."
+},{ nombre:	"La sociedad de la nieve",
+URL1:	"https://pics.filmaffinity.com/la_sociedad_de_la_nieve-826551508-large.jpg",
+URL2:	"https://ok.ru/video/6477063588606",
+sinopsis:	"En 1972, el vuelo 571 de la Fuerza Aérea Uruguaya, fletado para llevar a un equipo de rugby a Chile, se estrella en un glaciar en el corazón de los Andes. Solo 29 de sus 45 pasajeros sobreviven al accidente. Atrapados en uno de los entornos más inaccesibles y hostiles del planeta, se ven obligados a recurrir a medidas extremas para mantenerse con vida."
+},{ nombre:	"El mismo amor, la misma lluvia",
+URL1:	"https://pics.filmaffinity.com/el_mismo_amor_la_misma_lluvia-495597701-large.jpg",
+URL2:	"https://ok.ru/video/3293371173529",
+sinopsis:	"Argentina, años 80. La represión del gobierno militar, la guerra de las Malvinas, el retorno de la democracia, la crisis económica y la llegada de Menem al poder son el telón de fondo de la historia de Jorge y Laura. Él (Ricardo Darín) es una joven promesa de la literatura argentina, pero vive de los cuentos románticos que escribe para una revista de actualidad. Ella (Soledad Villamil) es una camarera que espera el regreso de su novio, un artista que ha montando una exposición en Uruguay y del que hace tiempo que no tiene noticias. Una noche se conocen y no tardan en irse a vivir juntos, pero la convivencia se deteriora y la relación se rompe."
+},{ nombre:	"Candy ",
+URL1:	"https://pics.filmaffinity.com/candy-331573414-large.jpg",
+URL2:	"https://ok.ru/video/1961209432637",
+sinopsis:	"Historia de una apasionada, duradera y autodestructiva relación amorosa. Candy es una joven y bella artista cuya ansia de vida la lleva al extremo de la cordura. Dan, es un poeta perdido enamorado de Candy. Ellos encuentran en la heroína un camino de placer ilimitado. Pero cuando la adicción domina ellos pierden lo que habían encontrado. Candy abre la puerta a una visión de ensueño que tendrá significado para aquellos que se han sentido deslumbrados por la belleza del mundo."
+},{ nombre:	"Perfect Blue",
+URL1:	"https://pics.filmaffinity.com/perfect_blue-402927995-large.jpg",
+URL2:	"https://ok.ru/video/1148172175967",
+sinopsis:	"Mima es la cantante de un famoso grupo musical japonés. Debido al fracaso de ventas de sus discos, su mánager decide apartarla del grupo y darle un papel en una serie de televisión. Mima cae entonces en una profunda depresión que la lleva a replantearse su vida y su carrera, pero su crisis se agrava cuando descubre que su vida está al alcance de cualquiera en Internet y que alguien la está vigilando. Cuando la serie empieza a emitirse por televisión, Mima comprueba que la ficción se reproduce en su vida real: sueño y realidad se confunden hasta el punto de cuestionarse su propia identidad. El desarrollo de los acontecimientos y su propia intuición llevarán a la protagonista a un desenlace absolutamente inesperado..."
+},{ nombre:	"Paprika, detective de los sueños",
+URL1:	"https://pics.filmaffinity.com/papurika-439873032-large.jpg",
+URL2:	"https://ok.ru/video/2439327320817",
+sinopsis:	"La psiquiatra Atsuko Chiba ha desarrollado un método de terapia revolucionario denominado -PT-, un prototipo de máquina experimental gracias a la cual es posible introducirse en la mente de los pacientes para tratar sus ansiedades. Pero uno de los modelos de PT es robado del laboratorio de la Dra. Atsuko, y comienzan a utilizarlo para invadir las mentes de sus creadores, destruyendo sus personalidades mientras duermen."
+},{ nombre:	"Noches de sol ",
+URL1:	"https://pics.filmaffinity.com/white_nights-407191796-large.jpg",
+URL2:	"https://ok.ru/video/3450291423869",
+sinopsis:	"Cuando el avión donde viaja Nikolai -Kolya- Rodchenko debe realizar un aterrizaje de emergencia en suelo soviético, el mundialmente famoso bailarín tiene razones para sentirse inquieto: unos años antes, cuando era la gran estrella del ballet ruso y un icono de la propaganda comunista, Kolya desertó y se instaló en los Estados Unidos. Ahora, contra su voluntad, vuelve a un país cuyo gobierno le considera un traidor."
+},{ nombre:	"Psychopathia Sexualis",
+URL1:	"https://www.lavanguardia.com/peliculas-series/images/movie/poster/2006/6/w300/8xR2fWXRDGmuyeabOSm6RISNTWZ.jpg",
+URL2:	"https://ok.ru/video/3020927732383",
+sinopsis:	"Psychopathia Sexualis es una película dirigida por Bret Wood en 2006, que explora las complejidades de la sexualidad humana a través de una serie de historias entrelazadas ambientadas en la época victoriana. Basada en el famoso texto médico del mismo nombre, la película ofrece una mirada oscura y provocativa a los tabúes sexuales de la época."
+},{ nombre:	"Rent-A-Pal",
+URL1:	"https://pics.filmaffinity.com/rent_a_pal-535304519-large.jpg",
+URL2:	"https://ok.ru/video/6216703871724",
+sinopsis:	"Ambientada en 1990, un soltero solitario llamado David (Brian Landis Folkins) busca la manera de escapar del aburrimiento diario que le supone cuidar de su madre anciana (Kathleen Brady). Un día descubre por accidente una extraña cinta de vídeo llamada Rent-A-Pal presentada por el carismático Andy (Wil Wheaton). Esta ofrece todo lo que David necesita: compañía, compasión y amistad. Sin embargo, su relación tiene un coste mucho más alto de lo que él está dispuesto a pagar."
+},{ nombre:	"Vidas cruzadas (Short Cuts) ",
+URL1:	"https://pics.filmaffinity.com/short_cuts-840057234-large.jpg",
+URL2:	"https://ok.ru/video/3245523864189",
+sinopsis:	"Adaptación de varios relatos del escritor norteamericano Raymond Carver que retratan la vida cotidiana de un grupo muy heterogéneo de personas que viven en Los Ángeles. De profesiones, caracteres y orígenes muy diferentes, todos intentan afrontar como pueden las dificultades de su vida laboral y personal; personas que se cruzan indiferentes ignorando los dramas ajenos. Sin embargo, en medio de tanta cotidianeidad, late la presencia del terror."
+},{ nombre:	"La doble vida de Verónica ",
+URL1:	"https://pics.filmaffinity.com/la_double_vie_de_veronique-368250917-large.jpg",
+URL2:	"https://ok.ru/video/3474809358973",
+sinopsis:	"Weronika vive en Polonia y tiene una brillante carrera como cantante, pero padece una grave dolencia cardíaca. En Francia, a más de mil kilómetros, vive Véronique, otra joven idéntica que guarda muchas similitudes vitales con ella, como su enfermedad y su gran pasión por la música. Ambas, a pesar de la distancia y de no tener aparentemente ninguna relación, son capaces de sentir que no están solas."
+},{ nombre:	"El olor de la papaya verde",
+URL1:	"https://pics.filmaffinity.com/mui_du_du_xanh_l_odeur_de_la_papaye_verte-556960928-large.jpg",
+URL2:	"https://ok.ru/video/2384969927192",
+sinopsis:	"Mui es una niña que llega a la ciudad para trabajar como sirvienta en una casa. La muerte, años atrás, de la hija menor de la familia hace que el padre se sienta culpable, y ese drama arruina la relación con su mujer. El hombre para evadirse escapa constantemente de casa con los ingresos de una pequeña mercería que sostiene la precaria economía del hogar. Mui, al mismo tiempo que trata de afrontar sus obligaciones de sirvienta sufre el acoso de Tin, el hijo menor de la familia. Pero Mui mantiene una pasión secreta por Khuyén, un compositor joven, rico y soltero, que de vez en cuando visita a la familia. Diez años más tarde, convertida Mui en una mujer de belleza salvaje, va a trabajar con Khuyén y a su lado comenzará para ella una vida más digna y esperanzada."
+},{ nombre:	"Lo que ignoramos",
+URL1:	"https://pics.filmaffinity.com/bhakshak-843000903-large.jpg",
+URL2:	"https://ok.ru/video/7194433686229",
+sinopsis:	"Una periodista que lucha por abrirse camino inicia una investigación sobre atroces casos de abuso y maltrato encubiertos en un centro de acogida para niñas."
+},{ nombre:	"Justicia para Sohee ",
+URL1:	"https://pics.filmaffinity.com/da_eum_so_hee-509792042-large.jpg",
+URL2:	"https://ok.ru/video/7744956271317",
+sinopsis:	"Kim Sohee, una estudiante luchadora, entra en un call center de un importante operador de internet para sus prácticas de fin de estudios. En pocos meses, su ánimo decae bajo el peso de unas condiciones de trabajo degradantes y unos objetivos cada vez más difíciles que la llevan hasta la muerte. Una serie de sucesos sospechosos en la empresa llaman la atención de las autoridades locales. La detective Yoo-jin, encargada de la investigación, queda profundamente conmocionada por lo que descubre. Sola, cuestiona a todo el sistema."
+},{ nombre:	"Joker ",
+URL1:	"https://pics.filmaffinity.com/joker-790658206-large.jpg",
+URL2:	"https://ok.ru/video/7403110795936",
+sinopsis:	"Arthur Fleck (Phoenix) vive en Gotham con su madre, y su única motivación en la vida es hacer reír a la gente. Actúa haciendo de payaso en pequeños trabajos, pero tiene problemas mentales que hacen que la gente le vea como un bicho raro. Su gran sueño es actuar como cómico delante del público, pero una serie de trágicos acontecimientos le hará ir incrementando su ira contra una sociedad que le ignora."
+},{ nombre:	"Juego de lágrimas",
+URL1:	"https://pics.filmaffinity.com/the_crying_game-313067334-large.jpg",
+URL2:	"https://ok.ru/video/3365821680253",
+sinopsis:	"La organización terrorista IRA secuestra a Jody, un soldado británico. Durante su confinamiento, el prisionero entabla amistad con Fergus, uno de los terroristas. Jody le pide a Fergus que le prometa que, si no sale vivo del cautiverio, vaya a ver a su novia, Dil, que vive en Londres."
+},{ nombre:	"La vida secreta de Walter Mitty",
+URL1:	"https://pics.filmaffinity.com/the_secret_life_of_walter_mitty-982661279-large.jpg",
+URL2:	"https://ok.ru/video/822113340057",
+sinopsis:	"El tímido empleado de una editorial consigue evadirse de su gris existencia imaginando que es el protagonista de grandes aventuras; un día, su sueño se hace realidad cuando conoce a una misteriosa mujer que le implica en una peligrosa misión... Remake de ‘La vida secreta de Walter Mitty’ (1947), película dirigida por Norman Z. McLeod e inspirada en un relato de James Thurber."
+},{ nombre:	"Doña Flor y sus dos maridos",
+URL1:	"https://pics.filmaffinity.com/dona_flor_e_seus_dois_maridos-251844797-large.jpg",
+URL2:	"https://ok.ru/video/3035383335591",
+sinopsis:	"Salvador de Bahia, años 40. La bella Floripides Guimaraes, conocida como Doña Flor, está casada con el pícaro y mujeriego Valdomiro Santos Guimaraes, alias Vadinho. Si bien su marido es un irresponsable apostador y juerguista, Doña Flor se siente compensada con la ardiente vida sexual que le da su esposo. Cuando, debido a su agitada vida, Vadinho muere de un infarto en pleno carnaval, Doña Flor sentirá que su vida ha quedado vacía. Por eso, se casa con el respetable y pulcro Dr. Teodoro Madureira, un hombre metódico y responsable. Pero el nuevo esposo no logra llenar el vacío pasional dejado por el ardiente Vadinho. Pero ocurre un hecho sobrenatural: Vadinho ha regresado al mundo de los vivos, dispuesto a saciar los deseos de la apasionada viuda como solo él sabe hacerlo."
+},{ nombre:	"Yo, Cristina F.",
+URL1:	"https://pics.filmaffinity.com/christiane_f_wir_kinder_vom_bahnhof_zoo-909679244-large.jpg",
+URL2:	"https://ok.ru/video/3501407079037",
+sinopsis:	"Christiane F. es una muchacha de 14 años que vive con su madre en un típico piso colmena en Berlín a mediados de los años 70. Su mayor deseo es escapar de esa realidad e ir al Sound, la discoteca más moderna de Berlín. Un día su amiga Kessi se cuela dentro con ella. En el Sound conoce a Detlev, de quien se enamora, y su grupo de amigos, que se dedican a trapichear con drogas. Para sentirse a la misma altura de Detlev y no quedarse rezagada, Christiane coqueteará con las drogas hasta que finalmente prueba la heroína de la que, aún siendo consciente de su peligro, se queda enganchada, al igual que Detlev y el resto. Christiane entrará así en una espiral de degradación que le impulsará a prostituirse para poder pagarse los chutes."
+},{ nombre:	"Cube ",
+URL1:	"https://pics.filmaffinity.com/cube-147414643-large.jpg",
+URL2:	"https://ok.ru/video/2565758716556",
+sinopsis:	"Seis personas aparecen encerradas en un complejo laberinto de habitaciones cúbicas que esconde trampas mortales. No saben cómo llegaron allí, pero pronto descubren que deberán resolver ciertos enigmas y sortear con habilidad todas las trampas si quieren sobrevivir."
+},{ nombre:	"Tras el cristal ",
+URL1:	"https://pics.filmaffinity.com/tras_el_cristal-407294914-large.jpg",
+URL2:	"https://ok.ru/video/1380264381026",
+sinopsis:	"Durante la Segunda Guerra Mundial, el doctor Klaus (Günter Meisner) torturó, asesinó y abusó de multitud de niños en los campos de concentración nazis. Acabada la contienda, un intento de suicidio le obligará a permanecer conectado a un pulmón de acero, ayudado solamente por su mujer Griselda (Marisa Paredes) y su hija Rena (Gisèle Echevarría). La aparición de un joven que se ofrece para cuidarlo establecerá entre ambos una sórdida relación basada en el deseo, la venganza y la fascinación por el mal."
+},{ nombre:	"La soledad ",
+URL1:	"https://pics.filmaffinity.com/la_soledad-744752368-large.jpg",
+URL2:	"https://ok.ru/video/852781828755",
+sinopsis:	"Luchando para sobrevivir en la jungla urbana de Caracas, José descubre que la decrépita mansión que habita pronto será demolida. Con la esperanza de salvar a su familia de la falta de vivienda, José se embarca en una búsqueda mística para encontrar unas morocotas de oro que se rumorean estar enterradas en esta casa. Una película basada en una historia real e interpretada por sus personajes reales."
+},{ nombre:	"Atacama",
+URL1:	"https://m.media-amazon.com/images/I/717rhLloK3L._SL1388_.jpg",
+URL2:	"https://www.youtube.com/watch?v=NbcjVBHtca0",
+sinopsis:	"Un Citadino, un Minero y una Astrónoma convergen en el Desierto de Atacama. La miseria y la ambición los llevan a lugares obscuros."
+},{ nombre:	"Fucking Amal",
+URL1:	"https://pics.filmaffinity.com/fucking_amal_fucking_amal-569353076-large.jpg",
+URL2:	"https://ok.ru/video/7033742494269",
+sinopsis:	"La película relata la historia de Agnes Ahlberg y Elin Olsson, alumnas de secundario en el -insignificante- pueblo de Åmål. Elin es extrovertida, popular y ha estado con innumerables chicos, pero encuentra su vida exasperantemente aburrida. Agnes, por el contrario, es tímida y no ha conseguido hacer amigos desde que se mudó con su familia a Åmål hace un año."
+},{ nombre:	"Trauma",
+URL1:	"https://pics.filmaffinity.com/trauma-315987621-large.jpg",
+URL2:	"https://ok.ru/video/5338930088509",
+sinopsis:	"Cuatro amigas deciden pasar unos días en una aldea rural en el Chile más profundo. Tras la primera impresión de encontrarse en el paraíso, se encuentran con un hombre y su hijo que tienen una forma muy particular de divertirse. Los atacantes llevan encima todo el legado siniestro del periodo más oscuro de la historia de Chile."
+},{ nombre:	"La naranja mecánica ",
+URL1:	"https://pics.filmaffinity.com/a_clockwork_orange-964766200-large.jpg",
+URL2:	"https://ok.ru/video/3419985349251",
+sinopsis:	"Gran Bretaña, en un futuro indeterminado. Alex (Malcolm McDowell) es un joven muy agresivo que tiene dos pasiones: la violencia desaforada y Beethoven. Es el jefe de la banda de los drugos, que dan rienda suelta a sus instintos más salvajes apaleando, violando y aterrorizando a la población. Cuando esa escalada de terror llega hasta el asesinato, Alex es detenido y, en prisión, se someterá voluntariamente a una innovadora experiencia de reeducación que pretende anular drásticamente cualquier atisbo de conducta antisocial."
+},{ nombre:	"Victoria",
+URL1:	"https://pics.filmaffinity.com/victoria-437008125-large.jpg",
+URL2:	"https://ok.ru/video/3989621574378",
+sinopsis:	"Rodada en un único plano secuencia, el film tiene como escenario el famoso barrio berlinés de Kreuzberg. La cámara es testigo de todo lo que le pasa a la joven Victoria, una joven española de Berlín, durante dos horas de su vida: desde las cuatro de la mañana hasta las seis: desde que conoce a cuatro jóvenes para los que la noche acaba de empezar, y cómo en ese breve periodo de tiempo le suceden cosas que darán un giro total a su vida."
+},{ nombre:	"Sympathy for Mr. Vengeance",
+URL1:	"https://pics.filmaffinity.com/boksuneun_naui_geot_sympathy_for_mr_vengeance-812536858-large.jpg",
+URL2:	"https://ok.ru/video/36269722119",
+sinopsis:	"Cuenta la historia de un sordomudo que busca desesperadamente 10 millones para comprar en el mercado negro un riñón para su hermana enferma. Primera parte de la trilogía de la venganza de Chan-wook Park, que completan -Oldboy- (2003) -Sympathy For Lady Vengeance- (2005)."
+},{ nombre:	"Old Boy",
+URL1:	"https://pics.filmaffinity.com/oldeuboi-501428657-large.jpg",
+URL2:	"https://ok.ru/video/959695096454",
+sinopsis:	"Oh Dae-su es un hombre de negocios coreano que un día es secuestrado y confinado durante años en una celda en la que sólo hay una televisión. Y, sin embargo, ignora por qué razón está allí... Segunda parte de la -trilogía de la venganza- de Park Chan-wook."
+},{ nombre:	"Sympathy for Lady Vengeance",
+URL1:	"https://pics.filmaffinity.com/chinjeolhan_geumjassi_sympathy_for_lady_vengeance-621600381-large.jpg",
+URL2:	"https://ok.ru/video/1583907801735",
+sinopsis:	"La bella Kum-ja ha pasado trece años en prisión por el secuestro y asesinato de un niño de 6 años. El crimen había conmocionado a la opinión pública tanto por su brutalidad como porque la asesina tenía tan solo 20 años cuando realizó un hecho tan horrible. Una vez cumplida la pena y en libertad, Kum-ja sólo desea vengarse... pero ¿De quién? Última parte de la trilogía de la venganza de Chan-wook Park, tras -Sympathy For Mr. Vengeance- y -Oldboy-."
+},{ nombre:	"Diarios de motocicleta",
+URL1:	"https://pics.filmaffinity.com/the_motorcycle_diaries_diarios_de_motocicleta-595600383-large.jpg",
+URL2:	"https://ok.ru/video/6650787400332",
+sinopsis:	"En 1952, siendo el -Che- Guevara (Gael García Bernal) estudiante de medicina, recorrió América del Sur, con su amigo Alberto Granado (Rodrigo de la Serna), en una destartalada moto. Ernesto es un joven estudiante de medicina de 23 años de edad, especializado en lepra. Alberto es un bioquímico de 29 años. Ambos jóvenes emprenden un viaje de descubrimiento de la rica y compleja topografía humana y social del continente hispanoamericano. Los dos dejaron atrás el familiar entorno de Buenos Aires en una desvencijada motocicleta Norton de 500 cc, imbuidos de un romántico espíritu aventurero."
+},{ nombre:	"Melancolía ",
+URL1:	"https://pics.filmaffinity.com/melancholia-569332875-large.jpg",
+URL2:	"https://ok.ru/video/3766271675123",
+sinopsis:	"Justine (Kirsten Dunst) y su prometido Michael (Alexander Skarsgård) celebran su boda con una suntuosa fiesta en casa de su hermana (Charlotte Gainsbourg) y su cuñado (Kiefer Sutherland). Mientras tanto, el planeta Melancolía se dirige hacia la Tierra..."
+},{ nombre:	"Good Bye, Lenin! ",
+URL1:	"https://pics.filmaffinity.com/good_bye_lenin-521077390-large.jpg",
+URL2:	"https://ok.ru/video/694710372998",
+sinopsis:	"Berlín, octubre de 1989. Unos días antes de la caída del Muro, la madre de Alex, una mujer orgullosa de sus ideas comunistas, entra en coma. Cuando despierta ocho meses después, su hijo hará lo posible y lo imposible para que no se entere de que está viviendo en una Alemania reunificada y capitalista. Su objetivo es convertir el apartamento familiar en una isla anclada en el pasado, una especie de museo del socialismo en el que su madre viva cómodamente creyendo que nada ha cambiado."
+},{ nombre:	"Bailarina en la oscuridad ",
+URL1:	"https://pics.filmaffinity.com/dancer_in_the_dark-965435583-large.jpg",
+URL2:	"https://ok.ru/video/343236807302",
+sinopsis:	"Selma, inmigrante checa y madre soltera, trabaja en la fábrica de un pueblo de los Estados Unidos. La única vía de escape a tan rutinaria vida es su pasión por la música, especialmente por las canciones y los números de baile de los musicales clásicos de Hollywood. Selma esconde un triste secreto: está perdiendo la vista, pero lo peor es que su hijo también se quedará ciego, si ella no consigue, a tiempo, el dinero suficiente para que se opere. Tercera película de la trilogía -Corazón dorado- de Lars Von Trier."
+},{ nombre:	"El odio ",
+URL1:	"https://pics.filmaffinity.com/la_haine_hate-391751524-large.jpg",
+URL2:	"https://ok.ru/video/3642488785465",
+sinopsis:	"Tras una noche de disturbios en un barrio marginal de las afueras de París, tres amigos adolescentes, Vinz, Saïd y Hubert (un judío, un árabe inmigrante y un boxeador amateur negro, respectivamente), son testigos de un hecho, en el que su amigo Abdel resulta herido por la policía. El deambular por la ciudad, la violencia entre bandas y los conflictos con la policía son las constantes en las 24 horas siguientes de la vida de estos jóvenes."
+},{ nombre:	"Brazil ",
+URL1:	"https://pics.filmaffinity.com/brazil-927425209-large.jpg",
+URL2:	"https://ok.ru/video/2105420614289",
+sinopsis:	"En un extraño y deprimente universo futurista donde reinan las máquinas, una mosca cae dentro de un ordenador y cambia el apellido del guerrillero Harry Tuttle (Robert de Niro) por el del tranquilo padre de familia Harry Buttle, que es detenido y asesinado por el aparato represor del Estado. El tranquilo burócrata Sam Lowry (Jonathan Pryce) es el encargado de devolver un talón a la familia de la víctima, circunstancia que le permite conocer a Jill Layton (Kim Greist), la mujer de sus sueños. Y, mientras la persigue, hace amistad con Harry Tuttle y se convierte en su cómplice."
+},{ nombre:	"El planeta salvaje",
+URL1:	"https://pics.filmaffinity.com/la_planete_sauvage-913350075-large.jpg",
+URL2:	"https://ok.ru/video/2407253347023",
+sinopsis:	"En el lejano planeta Ygam viven unas criaturas gigantescas llamadas “Draags” que han domesticado a los pequeños -Oms-, seres humanos que están siendo exterminados. Pero un Om consigue escapar..."
+},{ nombre:	"El hombre elefante ",
+URL1:	"https://pics.filmaffinity.com/the_elephant_man-250132787-large.jpg",
+URL2:	"https://ok.ru/video/4450648263225",
+sinopsis:	"A finales del siglo XIX, el doctor Frederick Treves descubre en un circo a un hombre llamado John Merrick. Se trata de un ciudadano británico con la cabeza monstruosamente deformada, que vive en una situación de constante humillación y sufrimiento al ser exhibido diariamente como una atracción de feria."
+},{ nombre:	"Celebración ",
+URL1:	"https://pics.filmaffinity.com/festen_the_celebration-514762874-large.jpg",
+URL2:	"https://ok.ru/video/3162880215687",
+sinopsis:	"Los Klingenfeldt, una familia de la alta burguesía danesa, se disponen a celebrar el sesenta cumpleaños del patriarca, un hombre de trayectoria y reputación intachable. Sin embargo, sus tres hijos, aunque muy diferentes entre sí, están dispuestos a aprovechar la ocasión para sacar a relucir los trapos sucios de la familia."
+},{ nombre:	"Réquiem por un sueño ",
+URL1:	"https://pics.filmaffinity.com/requiem_for_a_dream-213246371-large.jpg",
+URL2:	"https://ok.ru/video/4589281151571",
+sinopsis:	"Harry (Jared Leto) y su madre (Ellen Burstyn) tienen sueños muy distintos: ella está permanentemente a dieta esperando el día en que pueda participar en su concurso televisivo preferido; la ambición de Harry y su novia Marion (Jennifer Connelly) es hacerse ricos vendiendo droga y utilizar las ganancias para abrir un negocio propio, pero nunca tienen el dinero suficiente para ello. A pesar de todo, Harry y Marion no se resignan y harán lo inimaginable para conseguir la vida que anhelan."
+},{ nombre:	"Kids ",
+URL1:	"https://pics.filmaffinity.com/kids-652351690-large.jpg",
+URL2:	"https://ok.ru/video/342412561030",
+sinopsis:	"Las correrías de un grupo de adolescentes de Nueva York que consumen drogas y mantienen relaciones sexuales, con el sida planeando sobre sus cabezas, es una polémica y contundente cinta de diálogos explícitos y estética semidocumental. Un filme muy alabado en los círculos independientes del cine estadounidense."
+},{ nombre:	"La caza ",
+URL1:	"https://pics.filmaffinity.com/jagten_the_hunt-501510868-large.jpg",
+URL2:	"https://ok.ru/video/3126487288455",
+sinopsis:	"Tras un divorcio difícil, Lucas, un hombre de cuarenta años, ha encontrado una nueva novia, un nuevo trabajo y trata de reconstruir su relación con Marcus, su hijo adolescente. Pero algo empieza a ir mal: un detalle cualquiera, un comentario inocente y una mentira insignificante que se extiende como un virus invisible sembrando el estupor y la desconfianza en una pequeña población."
+},{ nombre:	"Los edukadores ",
+URL1:	"https://xl.movieposterdb.com/05_03/2004/0408777/xl_9711_0408777_ee15c309.jpg",
+URL2:	"https://archive.org/details/517s2486",
+sinopsis:	"Jan (Daniel Brühl), Peter (Stipe Erceg) y Jule (Julia Jentsch) están disfrutando de su rebelde juventud. Les une su pasión por cambiar el estado del mundo. Se convierten en -Los edukadores-, cuyas acciones no violentas tratan de avisar a los ricos locales de que sus días de abundancia están contados. Las complicaciones aparecen cuando Jule se enamora de ambos jóvenes. Además, una de sus operaciones se complica, y lo que se convierte en un rapto no intencionado acaba por ponerlos cara a cara con la ley."
+},{ nombre:	"Gomorra ",
+URL1:	"https://pics.filmaffinity.com/gomorra-604882347-large.jpg",
+URL2:	"https://ok.ru/video/2566146493087",
+sinopsis:	"Poder, dinero y sangre: estos son los valores a los que los habitantes de las provincias de Nápoles y Caserta tienen que enfrentarse cada día. No hay elección; no tienen más remedio que obedecer las leyes de la Camorra. Sólo unos pocos afortunados pueden llevar una vida normal."
+},{ nombre:	"Cabeza borradora",
+URL1:	"https://pics.filmaffinity.com/eraserhead-526127753-large.jpg",
+URL2:	"https://ok.ru/video/1719558540011",
+sinopsis:	"Henry Spencer, un joven depresivo y asustadizo, sufre desde pequeño unas extrañas pesadillas de las que intenta liberarse a través de su imaginación. Un día, su amiga Mary lo invita a cenar a casa; se entera entonces de que ha sido padre de un bebé prematuro y no humano. Mary y el extraño bebé se instalan en casa de Henry, donde un escenario iluminado tras el radiador muestra la presencia de una mujer."
+},{ nombre:	"El juicio de Nuremberg",
+URL1:	"https://pics.filmaffinity.com/judgment_at_nuremberg-190709277-large.jpg",
+URL2:	"https://ok.ru/video/3126243560095",
+sinopsis:	"En 1948, tres años después del final de la Segunda Guerra Mundial (1939-1945), cuatro jueces, cómplices de la política nazi de esterilización y limpieza étnica, van a ser juzgados en Nuremberg. Sobre Dan Haywood (Spencer Tracy), un juez norteamericano retirado, recae la importante responsabilidad de presidir este juicio contra los crímenes de guerra nazis."
+},{ nombre:	"La ciénaga ",
+URL1:	"https://pics.filmaffinity.com/la_cienaga-411901291-large.jpg",
+URL2:	"https://ok.ru/video/33444989599",
+sinopsis:	"Dos familias -una de clase media urbana y otra de productores rurales en decadencia- se entrecruzan en el sopor provinciano de una Salta caótica e inmutable, donde nada sucede pero todo está a punto de estallar."
+},{ nombre:	"El club",
+URL1:	"https://pics.filmaffinity.com/el_club_the_club-145703288-large.jpg",
+URL2:	"https://ok.ru/video/3174207851143",
+sinopsis:	"Cuatro sacerdotes conviven en una retirada casa de un pueblo costero, bajo la mirada de Mónica, una monja cuidadora. Los curas están ahí para purgar sus pecados y hacer penitencia. La rutina y tranquilidad del lugar se rompe cuando llega un atormentado quinto sacerdote, y los huéspedes reviven el pasado que creían haber dejado atrás."
+},{ nombre:	"El hundimiento",
+URL1:	"https://pics.filmaffinity.com/der_untergang-280008227-large.jpg",
+URL2:	"https://ok.ru/video/7842131020463",
+sinopsis:	"Berlín, abril de 1945. La guerra está sentenciada, pero en las calles de la capital del Reich todavía se libra una encarnizada batalla. Adolf Hitler (Bruno Ganz) y sus fieles se han atrincherado en un búnker. Entre ellos se encuentra Traudl Junge (Alexandra Maria Lara), la secretaria personal del Führer. En el exterior, la situación se recrudece. A pesar de que Berlín ya no puede resistir más, Hitler se niega a abandonar la ciudad y, acompañado de Eva Braun (Juliane Köhler), prepara su despedida."
+},{ nombre:	"Goyo ",
+URL1:	"https://pics.filmaffinity.com/goyo-458058526-large.jpg",
+URL2:	"https://ok.ru/video/7642229312213",
+sinopsis:	"Goyo es un hombre con Asperger, fanático de Van Gogh, que trabaja como guía en el Museo de Bellas Artes en la Ciudad de Buenos Aires. Su estructurada rutina se ve interrumpida cuando conoce a Eva, la nueva guardia de seguridad del museo, y el enamoramiento y la ternura se apoderan de él. Ella es una mujer que perdió la fe en el amor por una crisis en su matrimonio, y que por momentos la hace perder también la fe en sí misma. El inesperado encuentro entre Goyo y Eva les hará descubrir otra forma de amar y ser amados."
+},{ nombre:	"El gato desaparece ",
+URL1:	"https://pics.filmaffinity.com/el_gato_desaparece-311914122-large.jpg",
+URL2:	"https://ok.ru/video/7589364894442",
+sinopsis:	"Después de varios meses de internamiento en una clínica psiquiátrica, a raíz de un violento e inesperado brote psicótico, los médicos dan de alta a Luis. Beatriz, su mujer, experimenta sentimientos contrapuestos: por un lado, la alegría de recuperar a quien ha sido su pareja durante 25 años, la persona con la que ha compartido tantos proyectos; pero, por otro, la inquietud que le produce no saber si seguirá siendo el mismo de antes o si, por el contrario, aquel oscuro episodio volverá a repetirse."
+},{ nombre:	"La ola",
+URL1:	"https://pics.filmaffinity.com/die_welle-499455116-large.jpg",
+URL2:	"https://ok.ru/video/1885654878837",
+sinopsis:	"En Alemania, durante la semana de proyectos, al profesor de instituto Rainer Wenger (Jürgen Vogel) se le ocurre hacer un experimento para explicar a sus alumnos el funcionamiento de un régimen totalitario. En apenas unos días, lo que parecía una prueba inocua basada en la disciplina y el sentimiento de comunidad va derivando hacia una situación sobre la que el profesor pierde todo control."
+},{ nombre:	"La mujer Papa",
+URL1:	"https://pics.filmaffinity.com/die_papstin_pope_joan-885993559-large.jpg",
+URL2:	"https://ok.ru/video/1806930610842",
+sinopsis:	"Narra una de las leyendas menos conocidas de la historia de la Iglesia: la vida de la Papisa Juana, una joven alemana que llegó a ser Papa en el siglo IX haciéndose pasar por un hombre. En el año 814, justo tras la muerte de Carlomagno, nace una niña llamada Johanna Anglicus en un pueblo alemán a orillas del Rin. Es la hija del cura del pueblo, que no está muy contento de tener descendencia femenina. Pronto la joven comienza a estudiar intensamente la Biblia. Tras varias vicisitudes, Johanna decide adoptar una identidad masculina e ingresa en un monasterio benedictino. Ahí comienza su fulgurante carrera en el seno de la Iglesia."
+},{ nombre:	"Gattaca ",
+URL1:	"https://pics.filmaffinity.com/gattaca-690490097-large.jpg",
+URL2:	"https://ok.ru/video/2478831831669",
+sinopsis:	"Ambientada en una sociedad futura, en la que la mayor parte de los niños son concebidos in vitro y con técnicas de selección genética. Vincent (Ethan Hawke), uno de los últimos niños concebidos de modo natural, nace con una deficiencia cardíaca y no le auguran más de treinta años de vida. Se le considera un inválido y, como tal, está condenado a realizar los trabajos más desagradables. Su hermano Anton, en cambio, ha recibido una espléndida herencia genética que le garantiza múltiples oportunidades. Desde niño, Vincent sueña con viajar al espacio, pero sabe muy bien que nunca será seleccionado. Durante años ejerce toda clase de trabajos hasta que un día conoce a un hombre que le proporciona la clave para formar parte de la élite: suplantar a Jerome (Jude Law), un deportista que se quedó paralítico por culpa de un accidente. De este modo, Vincent ingresa en la Corporación Gattaca, una industria aeroespacial, que lo selecciona para realizar una misión en Titán. Todo irá bien, gracias a la ayuda de Jerome, hasta que el director del proyecto es asesinado y la consiguiente investigación pone en peligro los planes de Vincent."
+},{ nombre:	"El ombligo de Guie'dani ",
+URL1:	"https://pics.filmaffinity.com/xquipi_guie_dani-707140963-large.jpg",
+URL2:	"https://ok.ru/video/2069933787882",
+sinopsis:	"Guie’dani, una niña indígena zapoteca, y su madre, entran a trabajar como empleadas domésticas para una familia de clase media acomodada de la Ciudad de México. La pequeña no se adapta, es conflictiva y se rebela."
+},{ nombre:	"Madame Bovary ",
+URL1:	"https://pics.filmaffinity.com/madame_bovary-280138366-large.jpg",
+URL2:	"https://ok.ru/video/6148546103967",
+sinopsis:	"Adaptación de la novela homónima de Gustave Flaubert. Emma Bovary es la insatisfecha mujer de un médico rural que ansía pertenecer a la alta sociedad francesa. Sus ambiciones y un apasionado affaire con un joven aristócrata la conducirán a una situación de trágicas consecuencias. La musa de Chabrol, Isabelle Huppert, encarna a la fatal heroína."
+},{ nombre:	"After Life",
+URL1:	"https://pics.filmaffinity.com/wandafuru_raifu_after_life-704745165-large.jpg",
+URL2:	"https://ok.ru/video/36344760839",
+sinopsis:	"A mitad de camino entre el Cielo y la Tierra, los que acaban de morir son recibidos por unos guías que les ayudan a examinar sus recuerdos con el fin de rememorar un momento decisivo de sus vidas. Cada uno de los muertos debe escoger un único recuerdo para que sea plasmado en una película y poder así llevarlo con ellos cuando vayan al Cielo."
+},{ nombre:	"Noviembre ",
+URL1:	"https://pics.filmaffinity.com/noviembre-101600736-large.jpg",
+URL2:	"https://ok.ru/video/3451583924797",
+sinopsis:	"Empujado por su espíritu todavía idealista, Alfredo decide crear -un arte más libre, hecho con el corazón, capaz de hacer que la gente se sienta viva-. Su concepto del teatro va más allá del escenario, se traslada a la calle, cara a cara con el público esperando que éste se implique, provocándolo si es necesario. Sus actuaciones cargadas de denuncia social, sin límites ni censuras, llevan a poner en alerta a las fuerzas del orden público..."
+},{ nombre:	"Kramer contra Kramer",
+URL1:	"https://pics.filmaffinity.com/kramer_vs_kramer-548914774-large.jpg",
+URL2:	"https://ok.ru/video/3096966335000",
+sinopsis:	"Cuando Ted Kramer (Hoffman), un ejecutivo de publicidad, es abandonado por su mujer (Streep), tiene que hacerse cargo por primera vez de su hijo: deberá conquistar el afecto del niño y hacer de padre y madre a la vez, sin descuidar su carrera profesional."
+},{ nombre:	"La vida de los demás",
+URL1:	"https://pics.filmaffinity.com/sheytan_vojud_nadarad-837201270-large.jpg",
+URL2:	"https://ok.ru/video/4440237476528",
+sinopsis:	"Cuatro historias sobre la fortaleza moral y la pena de muerte que cuestionan hasta qué punto la libertad individual puede expresarse en un régimen despótico."
+},{ nombre:	"Bardo, falsa crónica de unas cuantas verdades ",
+URL1:	"https://pics.filmaffinity.com/bardo_falsa_cronica_de_unas_cuantas_verdades-823791704-large.jpg",
+URL2:	"https://ok.ru/video/4289088326303",
+sinopsis:	"'Bardo' es una comedia nostálgica en el marco de un viaje épico. Una crónica de incertidumbres donde el protagonista, un reconocido periodista y documentalista mexicano, regresa a su país enfrentando su identidad, sus afectos familiares o la absurdidad de sus memorias, así como el pasado y la nueva realidad de su país."
+},{ nombre:	"Crímenes del futuro ",
+URL1:	"https://pics.filmaffinity.com/crimes_of_the_future-315474597-large.jpg",
+URL2:	"https://ok.ru/video/5116783233592",
+sinopsis:	"Cuando la especie humana se adapta a un entorno artificial, el cuerpo humano es objeto de nuevas transformaciones y mutaciones. Con la ayuda de su compañera Caprice (Léa Seydoux), Saul Tenser (Viggo Mortensen), célebre artista performativo, escenifica la metamorfosis de sus órganos en espectáculos de vanguardia. Timlin (Kristen Stewart), una investigadora de la Oficina del Registro Nacional de Órganos, sigue de cerca sus prácticas. Es entonces cuando un grupo misterioso aparece: desean aprovechar la fama de Saul para revelar al mundo la próxima etapa de la evolución humana…"
+},{ nombre:	"Ágora ",
+URL1:	"https://pics.filmaffinity.com/agora-344690742-large.jpg",
+URL2:	"https://ok.ru/video/349623093819",
+sinopsis:	"En el siglo IV, Egipto era una provincia del Imperio Romano. La ciudad más importante, Alejandría, se había convertido en el último baluarte de la cultura frente a un mundo en crisis, dominado por la confusión y la violencia. En el año 391, hordas de fanáticos se ensañaron con la legendaria biblioteca de Alejandría. Atrapada tras sus muros, la brillante astrónoma Hypatia (Rachel Weisz), filósofa y atea, lucha por salvar la sabiduría del mundo antiguo, sin percibir que su joven esclavo Davo se debate entre el amor que le profesa en secreto y la libertad que podría alcanzar uniéndose al imparable ascenso del Cristianismo."
+},{ nombre:	"Plata dulce",
+URL1:	"https://posters.movieposterdb.com/15_10/1982/84512/l_84512_e3ce4b43.jpg",
+URL2:	"https://ok.ru/video/3286605302331",
+sinopsis:	"Carlos Bonifatti (Federico Luppi) y Rubén Molinuevo (Julio De Grazia), dos empresarios dedicados a la venta de botiquines, intentan mantener su fábrica abierta frente a los embates de la profunda política económica de desindustrialización que está llevando a cabo la última dictadura militar. Carlos se encuentra un día con un excompañero de la -colimba-, Arteche (Gianni Lunadei), que le ofrece un negocio redondo. Decide entonces dejar su trabajo y dedicarse a los negocios financieros y especulativos, los cuales están en auge. Mientras tanto, Rubén se empeña en continuar con la fábrica. Al principio los hechos parecen darle la razón a Carlos, que mejora notablemente su nivel de vida: auto nuevo, casa nueva. Sin embargo, al poco tiempo se produce un hecho inesperado que cambia para siempre sus vidas."
+},{ nombre:	"Ellas hablan ",
+URL1:	"https://pics.filmaffinity.com/women_talking-906961609-large.jpg",
+URL2:	"https://ok.ru/video/4994208303829",
+sinopsis:	"En 2010, las mujeres que integran una colonia religiosa tratan de reconciliarse con la fe tras haber sufrido una serie de agresiones sexuales."
+},{ nombre:	"El patrón. Radiografía de un crimen",
+URL1:	"https://pics.filmaffinity.com/el_patron_radiografia_de_un_crimen-806545083-large.jpg",
+URL2:	"https://ok.ru/video/1684790971013",
+sinopsis:	"'El patrón, radiografia de un crimen', se enfoca en un hecho criminal real sobre un hombre rural que llega a Buenos Aires en busca de trabajo y termina explotado por un siniestro patrón que le obliga a vender carne podrida y le somete a una verdadera esclavitud, en el corazón de la ciudad de Buenos Aires y en el siglo XXI."
+},{ nombre:	"Somos legión. La historia de los hackers",
+URL1:	"https://pics.filmaffinity.com/we_are_legion_the_story_of_the_hacktivists-889532182-large.jpg",
+URL2:	"https://ok.ru/video/87575956040",
+sinopsis:	"Anonymous comenzó a operar en 2008 y alcanzó notoriedad mundial en los últimos años, especialmente durante el caso Wikileaks y el escándalo por la detención de Julian Assange. Se trata de un grupo de activistas cibernéticos que realiza acciones en defensa de la libertad de expresión e información. Actúa como una verdadera -guerrilla cibernética-, dando golpes virtuales cargados de significado y, día a día, convoca más adeptos en todo el planeta. El documental se sumerge dentro del grupo para conocer el pensamiento de los más radicales que simbolizan la desobediencia civil en la era digital. Se explora el nacimiento y las raíces históricas de grupos como Cult of the Dead Cow y Electronic Disturbance Theater. Una de sus características es que usan máscaras de Guy Fawkes, las mismas del film -V de Vendetta-."
+},{ nombre:	"Neruda",
+URL1:	"https://pics.filmaffinity.com/neruda-469864507-large.jpg",
+URL2:	"https://ok.ru/video/1533295659721",
+sinopsis:	"En 1948, el senador y escritor Pablo Neruda acusa al gobierno chileno de traicionar a los comunistas en el congreso. El presidente González Videla lo desafuera y ordena su captura. El poeta emprende la huida del país junto a su mujer. Mientras es perseguido por el prefecto de la policía, Neruda comienza a escribir -Canto general- y se convierte en símbolo de la libertad y leyenda literaria."
+},{ nombre:	"Un método peligroso ",
+URL1:	"https://pics.filmaffinity.com/a_dangerous_method-737098028-large.jpg",
+URL2:	"https://ok.ru/video/1897995635317",
+sinopsis:	"Una poderosa historia de descubrimiento sexual e intelectual basada en acontecimientos reales a partir de la turbulenta relación entre el joven psiquiatra Carl Jung (Michael Fassbender), su mentor Sigmund Freud (Viggo Mortensen) y Sabina Spielrein (Keira Knightley). A este trío se añade Otto Gross (Vincent Cassel), un paciente libertino decidido a traspasar todos los límites."
+},{ nombre:	"La chancha",
+URL1:	"https://pics.filmaffinity.com/la_chancha-721734060-large.jpg",
+URL2:	"https://ok.ru/video/1682257414809",
+sinopsis:	"En medio de unas vacaciones familiares, Pablo vive un inesperado reencuentro que actualiza un trauma de su niñez. Confrontado con la ironía de la casualidad, inicia un perturbador retorno a los paisajes de su infancia, arrastrando en su proceso a su compañera Raquel y a su hijo Joáo. Pablo decide permanecer allí, recuperando un vínculo pasado para enmendar un recuerdo que condicionó toda su vida."
+},{ nombre:	"American History X",
+URL1:	"https://pics.filmaffinity.com/american_history_x-201185607-large.jpg",
+URL2:	"https://ok.ru/video/2477281774197",
+sinopsis:	"Derek (Edward Norton), un joven -skin head- californiano de ideología neonazi, es encarcelado por asesinar a un negro que pretendía robarle su furgoneta. Cuando sale de prisión y regresa a su barrio dispuesto a alejarse del mundo de la violencia, se encuentra con que su hermano pequeño (Edward Furlong), para quien Derek es el modelo a seguir, sigue el mismo camino que a él lo condujo a la cárcel."
+},{ nombre:	"Cholitas",
+URL1:	"https://pics.filmaffinity.com/cholitas-660429996-large.jpg",
+URL2:	"https://ok.ru/video/2265468111398",
+sinopsis:	"Muestra la vida de cinco mujeres indígenas que con sus vestimentas tradicionales como la pollera, una falda plisada, lograron ascender los 6.962 metros del Aconcagua, la más alta de América y la mayor hazaña del grupo."
+},{ nombre:	"Paris, Texas",
+URL1:	"https://pics.filmaffinity.com/paris_texas-814371242-large.jpg",
+URL2:	"https://vk.com/video289724640_456239039",
+sinopsis:	"Un hombre camina por el desierto de Texas sin recordar quién es. Su hermano lo busca e intenta que recuerde cómo era su vida cuatro años antes, cuando abandonó a su mujer y a su hijo. A medida que va recuperando la memoria y se relaciona con personas de su pasado, se plantea la necesidad de rehacer su vida."
+},{ nombre:	"Halley ",
+URL1:	"https://pics.filmaffinity.com/halley-209199460-large.jpg",
+URL2:	"https://ok.ru/video/7201334823510",
+sinopsis:	"Alberto está muerto y ya no puede esconderse. El maquillaje y el perfume ya no pueden ocultar su cuerpo en rápida descomposición. Consternado, decide retirarse del mundo. Pero antes de entregarse a su muerte en vida, Alberto inicia una insólita amistad con Luly, el gerente del gimnasio abierto las 24 horas, donde trabaja como guardia de noche."
+},{ nombre:	"El triángulo de la tristeza",
+URL1:	"https://pics.filmaffinity.com/triangle_of_sadness-259032337-large.jpg",
+URL2:	"https://ok.ru/video/5035848305365",
+sinopsis:	"Tras la Semana de la moda, Carl y Yaya, pareja de modelos e influencers, son invitados a un yate en un crucero de lujo. Mientras que la tripulación brinda todas las atenciones necesarias a los ricos invitados, el capitán se niega a salir de su cabina, a pesar de la llegada inminente de la célebre cena de gala. Los eventos toman un giro inesperado y el equilibrio de poder se invierte cuando se levanta una tormenta que pone en peligro el confort de los pasajeros."
+},{ nombre:	"Funeral Parade of Roses ",
+URL1:	"https://pics.filmaffinity.com/bara_no_soretsu_funeral_parade_of_roses-696373474-large.jpg",
+URL2:	"https://ok.ru/video/3721273739833",
+sinopsis:	"Retrato en clave surrealista de varios transexuales en el Tokio de los años 60. La película narra los acontecimientos que envuelven la vida de Eddie y otros travestidos de la escena underground de Tokio. El título de la película es un juego de palabras. -Bara-, que significa rosa, es un término japonés que sirve para designar peyorativamente a los homosexuales."
+},{ nombre:	"Anhell69",
+URL1:	"https://pics.filmaffinity.com/anhell69-465971500-large.jpg",
+URL2:	"https://ok.ru/video/6343510788678",
+sinopsis:	"Un coche funerario atraviesa las calles de Medellín, mientras que un joven director cuenta la historia de su pasado en una ciudad violenta y conservadora, recordando la pre-producción de su primera película, una historia de serie B de fantasmas."
+},{ nombre:	"Kika",
+URL1:	"https://pics.filmaffinity.com/kika-405258797-large.jpg",
+URL2:	"https://ok.ru/video/2085050059455",
+sinopsis:	"Kika, una maquilladora optimista y vital, vive con Ramón, un fotógrafo muy introvertido y obsesionado por la muerte de su madre. Se quieren pero no se entienden. Kika tiene una amiga con muy pocos prejuicios, Amparo; una acérrima enemiga, Andrea -caracortada-, directora y presentadora de un -reality show-; un amante americano que es padrastro de Ramón; y por último una criada bigotuda, enamorada de ella en secreto y hermana de un actor porno que, tras fugarse de la cárcel, se esconde en casa de Kika."
+},{ nombre:	"El cuarto desnudo",
+URL1:	"https://pics.filmaffinity.com/el_cuarto_desnudo-450916257-large.jpg",
+URL2:	"https://ok.ru/video/2943541512850",
+sinopsis:	"Película documental inclemente y directa que ofrece la visión de un mundo sin salir de un único espacio: el cuarto donde tienen lugar las consultas de un hospital infantil de México DF. Escuchar a los niños y a sus padres durante las consultas nos permite tener una visión más profunda y extrema de la realidad social de México. Pero no sólo es un retrato de México. A través de la fragilidad de estos niños, la película habla de la fragilidad de la naturaleza humana."
+},{ nombre:	"NEKRomantik ",
+URL1:	"https://pics.filmaffinity.com/nekromantik_nekromantik-388042252-large.jpg",
+URL2:	"https://ok.ru/video/2536831584888",
+sinopsis:	"Rob, un perturbado empleado de la morgue, se apodera de cuerpos de víctimas de accidentes de tráfico, robando sus ojos, pies y dedos para llevárselos a su -adorada- novia Betty, otra enferma necrófila que los almacena cuidadosamente en tarritos de cristal. Rob y Betty se convierten en expertos necrófilos cuando Rob trae a casa el cadáver podrido de la víctima de un disparo y hacen el amor con el cuerpo en un auténtico y macabro -menage a trois-. Desafortunadamente a Rob le despiden de su trabajo, dejándolo sin mas material para sus horripilantes juegos...Betty rabiosa, lo abandona llevándose a su putrefacto amante."
+},{ nombre:	"Waking Life",
+URL1:	"https://pics.filmaffinity.com/waking_life-164464544-large.jpg",
+URL2:	"https://ok.ru/video/407556655663",
+sinopsis:	"Un anónimo protagonista mantiene conversaciones con personas distintas que parecen entrar y salir de su vida arbitrariamente. Una frase, -dream is destiny- (el sueño es el destino), expresa la idea básica de la película: atreverse a entrar en el incontrolable mundo de los sueños, tan apasionante como inquietante y oscuro, y permitirse disfrutar al máximo del instante eterno que dura."
+},{ nombre:	"Vals con Bashir",
+URL1:	"https://pics.filmaffinity.com/waltz_with_bashir-882675627-large.jpg",
+URL2:	"https://ok.ru/video/1521989782217",
+sinopsis:	"Documental animado sobre la matanza de refugiados palestinos en Sabra y Chatila (Líbano) en 1982. Una noche, en un bar, un viejo amigo le cuenta a Folman una pesadilla recurrente en la que le persiguen siempre 26 perros. Los dos hombres llegan a la conclusión de que la pesadilla tiene que ver con una misión que realizaron para el ejército israelí durante la primera guerra con el Líbano a principios de los años ochenta. A Folman le sorprende el hecho de no recordar nada de ese periodo de su vida. Intrigado, decide hablar con viejos amigos y antiguos compañeros dispersados por el mundo entero. Necesita saber la verdad acerca de esa etapa y de sí mismo. Poco a poco sus recuerdos reaparecen bajo la forma de imágenes surrealistas."
+},{ nombre:	"Flirt ",
+URL1:	"https://pics.filmaffinity.com/flirt-626767163-large.jpg",
+URL2:	"https://ok.ru/video/217394776752",
+sinopsis:	"Narra la misma historia de tres formas diferentes en Nueva York, Berlín y Tokio. A través de personajes muy diversos con distinta orientación sexual, pero sirviéndose de las mismas circunstancias (un amante, un ultimátum, una llamada de teléfono y un arma) se analiza lo que tienen en común los asuntos del corazón en todas las latitudes."
+},{ nombre:	"Silencio de hielo",
+URL1:	"https://pics.filmaffinity.com/das_letzte_schweigen-237231883-large.jpg",
+URL2:	"https://ok.ru/video/6906617072214",
+sinopsis:	"Una bicicleta en un campo de trigo. Una niña desaparecida ¿Se repite la historia? Hace 23 años, Pia fue violada y asesinada en este mismo lugar ¿Le ha ocurrido lo mismo a la joven Sinikka? Krischan, el policía ya jubilado que se encargó de la primera investigación, está convencido de que existe una conexión entre los dos crímenes. Sus esfuerzos para descubrir al asesino fueron inútiles en el pasado pero, ahora, se ha propuesto hacer justicia junto a su colega David."
+},{ nombre:	"Lars y una chica de verdad",
+URL1:	"https://pics.filmaffinity.com/lars_and_the_real_girl-286893263-large.jpg",
+URL2:	"https://ok.ru/video/268050631302",
+sinopsis:	"Lars (Gosling), un joven muy dulce y muy tímido que vive con su hermano (Schneider) y su cuñada (Mortimer), lleva, por fin, a casa a Bianca, la chica de sus sueños. Lo malo es que se trata de una muñeca que compró en Internet, aunque él la trata como si fuera una mujer real. Aconsejada por una doctora (Clarkson) y con la intención de ayudarlo, su familia decide seguirle la corriente."
+},{ nombre:	"La decisión de Sophie ",
+URL1:	"https://pics.filmaffinity.com/sophie_s_choice-404175883-large.jpg",
+URL2:	"https://ok.ru/video/2549284145781",
+sinopsis:	"Verano de 1947. Stingo, un joven aspirante a escritor, se instala en una pensión familiar de Brooklyn. Su tranquilidad se verá pronto turbada por la terrible discusión de una pareja que vive en el piso de arriba. Cuando conoce a los amantes queda cautivado por su encanto y simpatía. Ella, Sophie Zawistowska, es una hermosa emigrante polaca y católica. Él, Nathan Landau, un encantador y desequilibrado científico judío. Poco a poco, Stingo se convierte en su mejor amigo. Sophie, hija de un ilustre profesor polaco, sobrevivió al campo de exterminio de Auschwitz, pero vive atormentada por su pasado."
+},{ nombre:	"Evil (Ondskan) ",
+URL1:	"https://pics.filmaffinity.com/ondskan_evil-350718265-large.jpg",
+URL2:	"https://ok.ru/video/3962301123137",
+sinopsis:	"Erik, un joven de 16 años expulsado de su escuela por su comportamiento violento, recibe la última oportunidad cuando su madre la envía a un exclusivo colegio privado. Allí pronto descubrirá, sin embargo, que los alumnos mayores ejercen un cruel reinado del terror sobre los estudiantes más jóvenes."
+},{ nombre:	"La historia sin fin",
+URL1:	"https://pics.filmaffinity.com/die_unendliche_geschichte_the_neverending_story-537936168-large.jpg",
+URL2:	"https://ok.ru/video/5685132397142",
+sinopsis:	"Escondido en el desván de su colegio, Bastian devora durante las horas de clase un libro enigmático, ”La historia interminable”, que relata la paulatina destrucción del Reino de Fantasía. Una especie de ”Nada” misteriosa destruye el país y a las criaturas que lo habitan. A medida que avanza en la lectura, Bastian se da cuenta de que la salvación de Fantasía depende de él; de que consiga entrar dentro del libro..."
+},{ nombre:	"Origen ",
+URL1:	"https://pics.filmaffinity.com/inception-652954101-large.jpg",
+URL2:	"https://ok.ru/video/6787289385685",
+sinopsis:	"Dom Cobb (DiCaprio) es un experto en el arte de apropiarse, durante el sueño, de los secretos del subconsciente ajeno. La extraña habilidad de Cobb le ha convertido en un hombre muy cotizado en el mundo del espionaje, pero también lo ha condenado a ser un fugitivo y, por consiguiente, a renunciar a llevar una vida normal. Su única oportunidad para cambiar de vida será hacer exactamente lo contrario de lo que ha hecho siempre: la incepción, que consiste en implantar una idea en el subconsciente en lugar de sustraerla. Sin embargo, su plan se complica debido a la intervención de alguien que parece predecir cada uno de sus movimientos, alguien a quien sólo Cobb podrá descubrir."
+},{ nombre:	"Flor del desierto",
+URL1:	"https://pics.filmaffinity.com/desert_flower-338934366-large.jpg",
+URL2:	"https://ok.ru/video/1272531520014",
+sinopsis:	"Narra la fascinante vida de Waris Dirie, en su viaje de hija de nómadas africanos a top model internacional y embajadora especial de las Naciones Unidas en África. Cuando, a la edad de 13 años, Waris se entera de que su padre tiene intención de casarla como cuarta esposa con un hombre mayor, se da cuenta de que no tiene más remedio que huir. Encuentra trabajo como sirvienta con unos parientes lejanos en la embajada somalí de Londres. Años más tarde, al estallar la guerra civil en Somalia y cerrarse la embajada, Waris, ya mujer, se encuentra ante la amenaza de ser deportada y de nuevo decide huir... El relato de la vida de Waris Dirie no sólo es una moderna Cenicienta, sino la historia de cómo una joven y valiente africana emigra a Europa y lucha para erradicar uno de los más crueles y atroces rituales, la ablación o mutilación genital femenina."
+},{ nombre:	"Un viaje alucinante al fondo de la mente ",
+URL1:	"https://pics.filmaffinity.com/altered_states-318658126-large.jpg",
+URL2:	"https://ok.ru/video/7119721925206",
+sinopsis:	"El científico Eddie Jessup (William Hurt) cree que hay otros estados de conciencia que son tan reales como la vida cotidiana. Utilizando la privación sensorial y añadiendo medicamentos potentes y alucinógenos, investiga estos estados alterados y soporta experiencias que hacen que la locura parezca una bendición."
+},{ nombre:	"Mulholland Drive ",
+URL1:	"https://pics.filmaffinity.com/mulholland_dr-783721234-large.jpg",
+URL2:	"https://ok.ru/video/6235751254658",
+sinopsis:	"Betty Elms (Naomi Watts), una joven aspirante a actriz, llega a Los Ángeles para convertirse en estrella de cine y se aloja en el apartamento de su tía. Allí conoce a la enigmática Rita (Laura Harring), una mujer que padece amnesia a causa de un accidente sufrido en Mulholland Drive. Las dos juntas deciden investigar quién es Rita y cómo llegó hasta allí."
+},{ nombre:	"Cerdita ",
+URL1:	"https://pics.filmaffinity.com/cerdita-167665190-large.jpg",
+URL2:	"https://ok.ru/video/7073180420776",
+sinopsis:	"Para Sara, el verano solo significa tener que soportar las continuas burlas de las otras chicas de su pequeño pueblo. Pero todo terminará cuando un desconocido llegue al pueblo y secuestre a sus acosadoras. Sara sabe más de lo que dice, y tendrá que decidir entre hablar y salvar a las chicas, o no decir nada para proteger al extraño hombre que la ha salvado..."
+},{ nombre:	"The Game ",
+URL1:	"https://pics.filmaffinity.com/the_game-132318919-large.jpg",
+URL2:	"https://ok.ru/video/6211080817282",
+sinopsis:	"El multimillonario Nicholas Van Orton (Michael Douglas) tiene todo lo que un hombre puede desear. Pero Conrad (Sean Penn), su díscolo hermano, aún es capaz de encontrar un regalo de cumpleaños que pueda sorprenderle: su ingreso en un club de ocio capaz de diseñar a su medida aventuras y pasatiempos exclusivos."
+},{ nombre:	"Spotlight ",
+URL1:	"https://pics.filmaffinity.com/spotlight-726888740-large.jpg",
+URL2:	"https://ok.ru/video/6914459568724",
+sinopsis:	"En el año 2002, un reducido equipo de reporteros de investigación del Boston Globe destapó los escándalos de pederastia cometidos durante décadas por curas del estado de Massachussets. La publicación de estos hechos, que la archidiócesis de Boston intentó ocultar, sacudió a la Iglesia Católica como institución."
+},{ nombre:	"María Magdalena",
+URL1:	"https://pics.filmaffinity.com/mary_magdalene-800147017-large.jpg",
+URL2:	"https://ok.ru/video/3737829182041",
+sinopsis:	"Película biográfica bíblica que cuenta la historia de María (Rooney Mara), una joven mujer en busca de una nueva forma de vida. Restringida por las jerarquías de la época; María desafía a su familia tradicional al unirse a un nuevo movimiento social dirigido por Jesús de Nazareth (Joaquin Phoenix). Pronto encuentra su lugar dentro del movimiento y en el corazón de un viaje que la conducirá a Jerusalén."
+},{ nombre:	"Los miserables",
+URL1:	"https://pics.filmaffinity.com/les_miserables-851787526-large.jpg",
+URL2:	"https://ok.ru/video/5184028805656",
+sinopsis:	"El policía Stéphane Ruiz acaba de unirse a la BAC, la Brigada de Lucha contra la Delincuencia de Montfermeil, un suburbio al este de París. Allí conoce a sus nuevos compañeros, Chris y Gwada, dos agentes experimentados en las enormes tensiones que existen entre los distintos grupos organizados que operan por el control del problemático barrio."
+},{ nombre:	"El niño ",
+URL1:	"https://pics.filmaffinity.com/l_enfant-955016529-large.jpg",
+URL2:	"https://ok.ru/video/2606781041369",
+sinopsis:	"Bruno tiene veinte años. Sonia, dieciocho. Son una pareja que sobrevive en los suburbios de Lieja, gracias a que ella cobra un subsidio mientras que él y su banda se dedican al robo. Cuando Sonia da a luz a su hijo Jimmy, entonces empieza a preguntarse si Bruno será capaz de comportarse como un buen padre o seguirá viviendo como siempre de sus trapicheos."
+},{ nombre:	"Un dios salvaje",
+URL1:	"https://pics.filmaffinity.com/carnage-776840648-large.jpg",
+URL2:	"https://ok.ru/video/534859745851",
+sinopsis:	"En Nueva York, dos matrimonios se reúnen, en principio de manera civilizada, para hablar de la reciente pelea que han tenido sus hijos en un parque. Pero el encuentro se complicará hasta límites insospechados... Adaptación de la obra teatral homónima de la autora francesa Yasmina Reza."
+},{ nombre:	"Toni Erdmann",
+URL1:	"https://pics.filmaffinity.com/toni_erdmann-500539117-large.jpg",
+URL2:	"https://ok.ru/video/3392323324575",
+sinopsis:	"Inès trabaja en una importante consultora alemana establecida en Bucarest. Su estresante vida está perfectamente organizada hasta que su extrovertido y bromista padre Winfried llega de improvisto y le pregunta ”¿eres feliz?”. Tras su incapacidad para responder, sufre un profundo cambio. Ese padre que a veces estorba y que la avergüenza un poco le va a ayudar a dar nuevamente sentido a su vida gracias a un personaje imaginario: el divertido Toni Erdmann…"
+},{ nombre:	"Fuckland ",
+URL1:	"https://pics.filmaffinity.com/fuckland-627493309-large.jpg",
+URL2:	"https://ok.ru/video/2191589771942",
+sinopsis:	"Primera película argentina rodada según los postulados del Dogma 95, con un equipo de filmación que llegó semi-clandestinamente a las islas Malvinas. Un argentino se propone reconquistar las islas con la idea de embarazar a las nativas del lugar y así repoblar el suelo con nuevas generaciones de argentinos."
+},{ nombre:	"Hedwig y The Angry Inch ",
+URL1:	"https://pics.filmaffinity.com/hedwig_and_the_angry_inch-530422066-large.jpg",
+URL2:	"https://ok.ru/video/3643595491965",
+sinopsis:	"Hedwig se sometió a una operación de cambio de sexo que le permitió casarse con un soldado americano y alcanzar la libertad al otro lado del Muro de Berlín. Sin embargo, la operación salió mal y Hedwig se quedó con esa “pulgada irritada” (“angry inch”) que da nombre a la película. En un parque de caravanas de Kansas, Hedwig decidió formar un grupo de rock. Así conoció a Tommy Gnosis, un joven que fue su amante y protegido antes de abandonarla, robarle sus canciones y triunfar como estrella del rock. Acompañada de su grupo paneslavo, “The Angry Inch”, siguió a Tommy en su gira, tocando en locales medio vacíos. Por medio de un collage de canciones, flashbacks e imágenes animadas, Hedwig cuenta la historia de su vida e intenta sacar partido de la prensa amarilla que se interesa por ella por haber sido amante del famoso cantante de rock Tommy Gnosis."
+},{ nombre:	"Irreversible ",
+URL1:	"https://pics.filmaffinity.com/irreversible-506590041-large.jpg",
+URL2:	"https://ok.ru/video/4511264934535",
+sinopsis:	"Irreversible. Porque el tiempo lo destruye todo. Porque algunos actos son irreparables. Porque el hombre es un animal. Porque el deseo de venganza es un impulso natural. Porque la mayoría de los crímenes quedan sin castigo. Porque la pérdida del amado destruye como un rayo. Porque el amor es el origen de la vida. Porque toda la historia se escribe con esperma y sangre. Porque las premoniciones no modifican el curso de los acontecimientos. Porque el tiempo lo revela todo: lo mejor y lo peor."
+},{ nombre:	"This Is England ",
+URL1:	"https://pics.filmaffinity.com/this_is_england-226367092-large.jpg",
+URL2:	"https://ok.ru/video/597476182587",
+sinopsis:	"Cinta británica independiente. Durante las vacaciones de verano de 1983, Shaun, (Thomas Turgoose), un niño solitario cuyo padre ha muerto en la guerra de Las Malvinas, es adoptado por un grupo de cabezas rapadas (skinheads). Con sus nuevos amigos, Shaun descubre las fiestas, su primer amor y las botas Dr. Martens. Uno de sus amigos es Combo (Stephen Graham) un skin racista que acaba de salir de la cárcel."
+},{ nombre:	"The Human Centipede (First Sequence) ",
+URL1:	"https://pics.filmaffinity.com/the_human_centipede_first_sequence-942214371-large.jpg",
+URL2:	"https://ok.ru/video/80446753447",
+sinopsis:	"El coche de dos chicas norteamericanas que viajan por Europa sufre una avería en medio de un bosque alemán. Buscando ayuda llegan a una casa aislada; al día siguiente, se despiertan en un tétrico sótano junto a un japonés. Poco después descubren que están en manos de un siniestro cirujano alemán especializado en separar a gemelos siameses, pero lo que piensa hacer con ellos supera todos los límites de lo imaginable."
+},{ nombre:	"Shine. El resplandor de un genio ",
+URL1:	"https://pics.filmaffinity.com/shine-287140726-large.jpg",
+URL2:	"https://ok.ru/video/342110243462",
+sinopsis:	"Basada en la vida de David Helfgott, un niño prodigio, Shine examina su tortuosa vida, desde su infancia dominada por su estricto padre, hasta llegar a sus crisis nerviosas cuando es adulto. Cuando es aceptado en una prestigiosa escuela de música en Londres, la Royal College of Music, David se siente capaz de huir de su padre y arriesgarlo todo por su única pasión, la música. Pero el rechazo de su padre y las presiones de su trabajo, acaban sumiéndole en una enfermedad mental. Sólo el amor de una mujer que le comprende de verdad, puede salvarle y devolverle a la sociedad para que ésta disfrute con su música."
+},{ nombre:	"Time ",
+URL1:	"https://pics.filmaffinity.com/shi_gan_time-250646039-large.jpg",
+URL2:	"https://ok.ru/video/3350422489636",
+sinopsis:	"Seh-hee y Ji-woo forman una pareja muy enamorada. Llevan juntos dos años, pero, a causa del lento discurrir del tiempo, Seh-hee empieza a sentirse ansiosa y preocupada, temerosa de que Ji-woo pudiera cansarse de ella. Por eso se pone histérica cada vez que ve a Ji-woo prestando la más pequeña atención a otras mujeres. Un día sucede lo que ella se temía: Ji-woo no logra hacer el amor con ella, y sólo lo consigue cuando Seh-hee le propone que se imagine que está con otra mujer. Entonces, Seh-hee se siente ansiosa y frustrada, además de disgustada de que su rostro sea siempre igual y que su aspecto no pueda dar a su compañero una impresión nueva en cada encuentro. Por su parte, Ji-woo considera que la propuesta de Seh-hee de que piense en otra mujer cuando hacen el amor está fuera de lugar."
+},{ nombre:	"The Human Centipede 2 (Full Sequence) ",
+URL1:	"https://pics.filmaffinity.com/the_human_centipede_2_full_sequence-853769194-large.jpg",
+URL2:	"https://ok.ru/video/5166814792278",
+sinopsis:	"Martin es un solitario con problemas mentales que vive con su madre en un barrio marginal de Londres. Trabaja en el turno nocturno como guardia de seguridad en un estacionamiento subterráneo. Allí se obsesiona cada noche viendo una y otra vez la película 'The Human Centipede' en el pequeño televisor de su oficina. Al borde de la locura por culpa de su padre, y su difícil niñez, Martin pone en marcha un plan para emular el ciempiés humano que tantas veces ha visto en su película favorita. Secuela del largometraje holandés -The Human Centipede- (2009)."
+},{ nombre:	"Donnie Darko",
+URL1:	"https://pics.filmaffinity.com/donnie_darko-454757435-large.jpg",
+URL2:	"https://ok.ru/video/339782863419",
+sinopsis:	"Donnie es un chico americano dotado de gran inteligencia e imaginación. Tras escapar milagrosamente de una muerte casi segura, comienza a sufrir alucinaciones que lo llevan a actuar como nunca hubiera imaginado y a descubrir un mundo insólito a su alrededor."
+},{ nombre:	"Y tu mamá también ",
+URL1:	"https://pics.filmaffinity.com/y_tu_mama_tambien-381997517-large.jpg",
+URL2:	"https://ok.ru/video/2567737445083",
+sinopsis:	"Aunque pertenecen a clases sociales muy distintas, Julio y Tenoch son grandes amigos. En una fiesta conocen a Luisa, una deprimida chica española casada con un primo de Tenoch. Para superar la crisis, Luisa decide acompañar a los dos chicos en un viaje sin rumbo fijo. La aventura pondrá a prueba su amistad y marcará sus vidas para siempre."
+},{ nombre:	"El lado oscuro del corazón ",
+URL1:	"https://pics.filmaffinity.com/el_lado_oscuro_del_corazon-287528769-large.jpg",
+URL2:	"https://ok.ru/video/4187155598058",
+sinopsis:	"Oliverio es un poeta treintañero que sobrevive editando poesía comercial mientras recorre Buenos Aires. Lo único que desea es encontrar a la mujer de sus sueños, que le comprenda y que le haga volar. En Montevideo, conoce a Ana, una prostituta de la que se enamora..."
+},{ nombre:	"Malèna ",
+URL1:	"https://pics.filmaffinity.com/malena-930022584-large.jpg",
+URL2:	"https://ok.ru/video/8062843947724",
+sinopsis:	"Malena es la belleza más encantadora e irresistible de Castelcuto, un tranquilo pueblo de la soleada costa siciliana. Es nueva en el pueblo y, estando su marido en la guerra, cada paseo que da se convierte en un espectáculo que va acompañado de las lujuriosas miradas de los hombres y de los resentidos cotilleos de sus envidiosas esposas. Un ejército de flacos adolescentes en bicicleta la sigue allí donde vaya, con la única intención de observar su exquisita y arquetípica belleza. Pero entre ellos se encuentra Renato, un chico de trece años con mucha imaginación que lleva su deseo a unos límites de obsesiva fantasía."
+},{ nombre:	"El experimento",
+URL1:	"https://pics.filmaffinity.com/das_experiment-353430638-large.jpg",
+URL2:	"https://archive.org/details/das-experiment-2001-vose",
+sinopsis:	"Llegaron a una cárcel ficticia buscando una forma rápida de ganar dinero fácil. Ahora sólo buscan la manera de sobrevivir. Todo empezó como un experimento científico protagonizado durante dos semanas por veinte hombres que cobrarían por su colaboración 4.000 marcos. El proyecto consistía en estudiar el comportamiento agresivo en un ambiente carcelario simulado. A los participantes se les asigna el papel de guardianes (ocho) o prisioneros (doce). Los prisioneros deben obedecer las órdenes, y los guardias deben mantener el orden. Pero dar a un hombre un poco de poder puede tener consecuencias insospechadas..."
+},{ nombre:	"Las hermanas de la Magdalena ",
+URL1:	"https://pics.filmaffinity.com/the_magdalene_sisters-810947239-large.jpg",
+URL2:	"https://ok.ru/video/1777507240661",
+sinopsis:	"Los conventos de la Magdalena en Irlanda eran gestionados por las hermanas de la Misericordia en nombre de la Iglesia católica. Acogían a muchachas enviadas por sus familias o por los orfanatos, que allí quedaban encerradas y a las que se obligaba a trabajar en las lavanderías para expiar sus pecados. Dichos pecados eran de distinta naturaleza: desde ser madre soltera a ser demasiado bella o demasiado fea, o demasiado simple o demasiado inteligente, o víctima de una violación, y por tales pecados trabajaban sin percibir ninguna retribución, 364 días al año, y se las hacía pasar hambre, se las sometía a castigos físicos, humillaciones, violencia fisica y moral, y se las separaba de sus hijos. Las penas que tenían que cumplir eran ilimitadas. Miles de mujeres vivían y morían allí. El último convento de la Magdalena en Irlanda cerró sus puertas en 1996."
+},{ nombre:	"Déjame entrar ",
+URL1:	"https://pics.filmaffinity.com/lat_den_ratte_komma_in_let_the_right_one_in-982447320-large.jpg",
+URL2:	"https://ok.ru/video/4671327636029",
+sinopsis:	"Oskar, un tímido niño de doce años, que es acosado en el colegio por sus compañeros, se hace amigo de Eli, una misteriosa vecina de su edad, cuya llegada al barrio coincide con una serie de inexplicables muertes. A pesar de que Oskar sospecha que Eli es un vampiro, intenta que su amistad esté por encima de su miedo."
+},{ nombre:	"No me temas",
+URL1:	"https://pics.filmaffinity.com/den_du_frygter_fear_me_not-903890186-large.jpg",
+URL2:	"https://ok.ru/video/4190985521789",
+sinopsis:	"Cuando a Michael le hablan sobre un ensayo clínico con un nuevo antidepresivo, se apunta sin pensárselo. Desgraciadamente, las pastillas tienen graves efectos secundarios y deciden suspender el experimento. Pero Michael se niega a dejar el nuevo estado de calma y autocontrol que le han procurado las pastillas y decide seguir con el experimento por su cuenta. Intoxicado por su rápido éxito, Michael siente la necesidad de controlar también la vida de otras personas. Poco a poco, sus juegos psicológicos se vuelven más drásticos, hasta que descubre algo que le fuerza a ver sus acciones bajo una luz aterradora."
+},{ nombre:	"Passengers",
+URL1:	"https://pics.filmaffinity.com/passengers-294213691-large.jpg",
+URL2:	"https://ok.ru/video/3657986083519",
+sinopsis:	"Un avión se estrella y tan sólo sobreviven cinco personas. Claire (Anne Hathaway), una brillante psicóloga, deberá ayudar a los supervivientes a superar el trauma. Pero, inexplicablemente, éstos o bien desaparecen o empiezan a faltar a las sesiones de terapia. Por otra parte, ni siquiera se sabe qué fue lo que provocó el accidente. Entre los supervivientes está Eric (Patrick Wilson), un hombre atractivo que no parece necesitar terapia."
+},{ nombre:	"El mundo de ayer",
+URL1:	"https://pics.filmaffinity.com/usvit-356137629-large.jpg",
+URL2:	"https://ok.ru/video/7223787063836",
+sinopsis:	"Helena está a punto de dar a luz y se enfrenta a un futuro prometedor en una ciudad moderna como esposa de un joven y exitoso director de fábrica. Todas sus ilusiones pronto se desvanecen cuando aparece el cadáver de un bebé intersexual recién nacido en medio de su fábrica y averigua qué ocurrió allí por la seguridad de su propio hijo."
+},{ nombre:	"Hope ",
+URL1:	"https://pics.filmaffinity.com/so_won-762923266-large.jpg",
+URL2:	"https://ok.ru/video/5044345047687",
+sinopsis:	"Una niña llamada So-won (Lee Re) se convierte en víctima de la violencia. Su familia pasa por la desesperación y el dolor al intentar abrir otra puerta en su vida."
+},{ nombre:	"Under the Skin ",
+URL1:	"https://pics.filmaffinity.com/under_the_skin-636672743-large.jpg",
+URL2:	"https://ok.ru/video/8520897071838",
+sinopsis:	"Una misteriosa mujer (Scarlett Johansson) deambula por las calles de Escocia, arrastrando a hombres solitarios y confiados a un destino fatal... Adaptación surrealista de la novela homónima de Michel Faber."
+},{ nombre:	"Perfect Days",
+URL1:	"https://pics.filmaffinity.com/perfect_days-909704750-large.jpg",
+URL2:	"https://ok.ru/video/7362533591631",
+sinopsis:	"Hirayama parece totalmente satisfecho con su sencilla vida de limpiador de retretes en Tokio. Fuera de su estructurada rutina diaria, disfruta de su pasión por la música y los libros. Le encantan los árboles y les hace fotos. Una serie de encuentros inesperados revelan poco a poco más de su pasado."
+},{ nombre:	"Proyecto Lazarus",
+URL1:	"https://pics.filmaffinity.com/the_lazarus_project-230674661-large.jpg",
+URL2:	"https://ok.ru/video/804615359110",
+sinopsis:	"Narra la historia de hombre que, en circustancias trágicas, pierde todo aquello por lo que había vivido hasta el momento. Para poder recuperarlo deberá atravesar una misteriosa serie de pruebas de origen místico, pruebas que pondrán a prueba su fe, su cordura, y le harán explorar los espacios más recónditos de su alma... Debut en la dirección del guionista de Eagle Eye y los futuros remakes de Furia de Titanes y Los amos de la noche."
+},{ nombre:	"Ana de día ",
+URL1:	"https://pics.filmaffinity.com/ana_de_dia-454836458-large.jpg",
+URL2:	"https://ok.ru/video/4193439386300",
+sinopsis:	"Ana es una joven formal, educada en una familia de clase media tradicional. Está a punto de terminar su doctorado en derecho, entrar a formar parte de una empresa y casarse, pero no se siente realizada. Un día, descubre que una doble idéntica a ella ha ocupado su lugar, llevando a cabo todas sus responsabilidades y obligaciones. Ana entonces se debate entre luchar por su identidad perdida o, por lo contrario, intentar buscar su propia identidad ajena a todo lo que suponía su vida -normal-. Dándose cuenta de que por primera vez es totalmente libre, Ana decide explorar su nuevo anonimato y libertad, probando sus límites y buscando el sentido de su propia existencia entre las noches madrileñas de cabaret y la pensión donde se alojará, repleta de personajes que anhelan así mismo desaparecer en la noche."
+},{ nombre:	"Tres colores: Azul ",
+URL1:	"https://pics.filmaffinity.com/trois_couleurs_bleu_three_colours_blue-675116795-large.jpg",
+URL2:	"https://ok.ru/video/3062801369624",
+sinopsis:	"En un accidente de coche, Julie pierde a su marido Patrice, un prestigioso compositor, y a su hija Anna. Al recuperarse de sus lesiones, decide comenzar una nueva vida, independiente, solitaria y anónima, alejada de los privilegios que antes disfrutaba. Olivier, el ayudante de Patrice, intenta sacarla de su aislamiento. Olivier está enamorado de ella desde hace muchos años y acaba convenciéndola para que termine el «Concierto para Europa», una ambiciosa obra inacabada de Patrice."
+},{ nombre:	"Tres colores: Blanco ",
+URL1:	"https://pics.filmaffinity.com/trois_couleurs_blanc-963281907-large.jpg",
+URL2:	"https://ok.ru/video/2993551510161",
+sinopsis:	"Karol ama profundamente a Dominique, pero ella lo abandona debido a que él sufre un problema de impotencia. Entonces decide volver, con su amigo Nikolai, a su Polonia natal."
+},{ nombre:	"Tres colores: Rojo",
+URL1:	"https://pics.filmaffinity.com/trois_couleurs_rouge_three_colours_red-881570535-large.jpg",
+URL2:	"https://ok.ru/video/3065088772632",
+sinopsis:	"Valentina, una joven estudiante que se gana la vida como modelo, salva la vida de un perro atropellado por un coche. La búsqueda de su dueño la conduce a un juez jubilado que tiene una extraña obsesión: escuchar las conversaciones telefónicas de sus vecinos. Si antes el espionaje telefónico formaba parte de su trabajo, ahora se ha convertido en un vicio. A Valentina le desagrada la conducta del hombre, pero no puede evitar ir a verlo."
+},{ nombre:	"Elephant ",
+URL1:	"https://pics.filmaffinity.com/elephant-448665401-large.jpg",
+URL2:	"https://ok.ru/video/321064864390",
+sinopsis:	"Recreación de la matanza perpetrada por dos adolescentes en el instituto Columbine. Es un día cualquiera de otoño, y todos los estudiantes hacen su vida rutinaria: Eli, camino de clase, convence a una pareja de rockeros para hacerles unas fotos. Nate termina su entrenamiento de fútbol y queda con su novia Carrie para comer. John deja las llaves del coche de su padre en la conserjería del instituto para que las recoja su hermano. Pero ese día no será como los demás..."
+},{ nombre:	"Historias de Nueva York ",
+URL1:	"https://pics.filmaffinity.com/new_york_stories-168948046-large.jpg",
+URL2:	"https://ok.ru/video/3438540163709",
+sinopsis:	"Película que reúne tres historias independientes ambientadas en Nueva York: 1.-Apuntes al natural-, de Scorsese; 2. -Vida sin Zoe-, de Coppola; 3. -Edipo reprimido-, de Woody Allen. "
+},{ nombre:	"La otra familia ",
+URL1:	"https://pics.filmaffinity.com/la_otra_familia-697169372-large.jpg",
+URL2:	"https://ok.ru/video/2453956070107",
+sinopsis:	"Después de ser abandonado durante tres días por una madre adicta al crack, a Hendrix, un niño de siete años, lo encuentra una amiga que lo entrega a una pareja homosexual. Mientras que a la madre la obligan a seguir un tratamiento de rehabilitación, su amante, un traficante de drogas, intentará sacar partido del niño vendiéndolo a un matrimonio que acaba de perder a su bebé. La madre huye de la clínica para recuperarlo, pero las autoridades, para protegerlo, tratan de ingresarlo en un orfanato."
+},{ nombre:	"Mar adentro ",
+URL1:	"https://pics.filmaffinity.com/mar_adentro-201709363-large.jpg",
+URL2:	"https://ok.ru/video/6976309824140",
+sinopsis:	"Ramón (Javier Bardem) lleva casi treinta años postrado en una cama al cuidado de su familia. Su única ventana al mundo es la de su habitación, que da al mar, donde sufrió el accidente que interrumpió su juventud. Desde entonces, su único deseo es morir dignamente. En su vida ejercen una gran influencia dos mujeres: Julia (Belén Rueda), una abogada que apoya su causa, y Rosa (Lola Dueñas), una vecina que intenta convencerlo de que vivir merece la pena. Pero también ellas, cautivadas por la luminosa personalidad de Ramón, se replantearán los principios que rigen sus vidas. Él sabe que sólo quien de verdad le ame le ayudará a emprender el último viaje."
+},{ nombre:	"Los fantasmas de Goya ",
+URL1:	"https://pics.filmaffinity.com/goya_s_ghosts_los_fantasmas_de_goya-849447742-large.jpg",
+URL2:	"https://ok.ru/video/3906456259231",
+sinopsis:	"España, 1792. Goya (Stellan Skarsgard), el pintor de la Corte de Carlos IV (1788-1808), se ve implicado en un gran escándalo cuando su musa adolescente (Natalie Portman) es acusada de herejía por un importante miembro de la Inquisición (Javier Bardem)."
+},{ nombre:	"La lengua de las mariposas",
+URL1:	"https://pics.filmaffinity.com/la_lengua_de_las_mariposas-374462450-large.jpg",
+URL2:	"https://ok.ru/video/6333858253452",
+sinopsis:	"Situada en 1936, Don Gregorio enseñará a Moncho con dedicación y paciencia toda su sabiduría en cuanto a los conocimientos, la literatura, la naturaleza, y hasta las mujeres. Pero el trasfondo de la amenaza política subsistirá siempre, especialmente cuando Don Gregorio es atacado por ser considerado un enemigo del régimen fascista. Así se irá abriendo entre estos dos amigos una brecha, traída por la fuerza del contexto que los rodea."
+},{ nombre:	"Miedo al miedo",
+URL1:	"https://pics.filmaffinity.com/angst_vor_der_angst_fear_of_fear_tv-101926048-large.jpg",
+URL2:	"https://ok.ru/video/7048100448832",
+sinopsis:	"Margot Staudte es un ama de casa que quiere a su marido Kurt y a su hija Bibi y vive rodeada de comodidades. Pero, hacia el final de su segundo embarazo, se apodera de ella una angustia creciente. Después del parto, las drogas y el alcohol la calman aparentemente, pero su terror no disminuye."
+}
+
+
+
+        ];
+
+        // Función para cargar las películas en el grid
+        function loadMovies() {
+            const movieContainer = document.getElementById('movieContainer');
+            
+            movies.forEach(movie => {
+                const movieCard = document.createElement('div');
+                movieCard.className = 'movie-card';
+                
+                movieCard.innerHTML = `
+                    <img src="${movie.URL1}" alt="${movie.nombre}" class="movie-poster" loading="lazy">
+                    <div class="movie-overlay">
+                        <div class="movie-info">
+                            <h3 class="movie-title">${movie.nombre}</h3>
+                            <p class="movie-synopsis">${movie.sinopsis}</p>
+                        </div>
+                        <a href="${movie.URL2}" class="watch-btn" target="_blank">Ver</a>
+                    </div>
+                `;
+                
+                movieContainer.appendChild(movieCard);
+            });
+        }
+
+        // Cargar películas cuando la página esté lista
+        document.addEventListener('DOMContentLoaded', loadMovies);
+    </script>
+</body>
+</html>
